@@ -21,27 +21,49 @@ import NavBar from './components/NavBar.vue'
 </script>
 
 <template>
-  <div class="container">
-    <NavBar class="nav" />
-    <div class="main">
-      <router-view />
+  <div id="wrapper">
+    <div class="content">
+      <NavBar class="nav" />
+      <div class="main">
+        <router-view />
+      </div>
+      <div class="result">Result</div>
     </div>
-    <div class="result">Result</div>
-  </div>
 
-  <FooterComponent />
+    <FooterComponent />
+  </div>
 </template>
 
 <style scoped lang="scss">
-.container {
-  display: grid;
+@use '@/assets/variables' as *;
+#wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 
-  // grid-template-rows: auto 1fr;
-  // grid-template-columns: fill 300px;
-  grid-template: none / auto 300px;
+  @media not screen and (max-width: 768px) {
+    max-width: 1200px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: 0 auto;
 
-  max-width: 1200px;
-  margin: 0 auto;
+    display: grid;
+    gap: 10px;
+    grid-template: none / auto 300px;
+
+    height: fit-content;
+
+    .main,
+    .result {
+      background-color: $bg3;
+    }
+  }
 
   .nav {
     grid-column: 1 / 3;
@@ -53,6 +75,9 @@ import NavBar from './components/NavBar.vue'
   .result {
     grid-column: 2 / 3;
     padding: 1rem;
+
+    background-color: $bg3;
+    flex-grow: 1;
   }
 }
 </style>

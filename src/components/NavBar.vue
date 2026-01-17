@@ -15,6 +15,9 @@
 @use '@/assets/variables' as *;
 
 nav {
+  width: 100%;
+  overflow: hidden;
+
   ul {
     $arrow-size: 0.5rem;
 
@@ -26,10 +29,17 @@ nav {
 
     margin: 0;
     padding: 1rem;
+    padding-left: 1rem + $arrow-size;
+
+    box-sizing: border-box;
+    overflow-y: hidden;
+    overflow-x: auto;
 
     a {
       text-decoration: none;
       color: $textcolor;
+
+      text-wrap: nowrap;
 
       display: block;
       padding: 0.5rem 1rem;
