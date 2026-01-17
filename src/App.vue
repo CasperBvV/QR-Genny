@@ -15,7 +15,9 @@
   along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -->
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import FooterComponent from './components/FooterComponent.vue'
+</script>
 
 <template>
   <h1>You did it!</h1>
@@ -23,6 +25,8 @@
     Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
     documentation
   </p>
+
+  <FooterComponent />
 </template>
 
 <style scoped></style>
