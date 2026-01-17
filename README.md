@@ -73,3 +73,11 @@ The build tool used.
 - [Official Website](https://vite.dev/)
 - [GitHub Repository](https://github.com/vitejs/vite)
 - Vite is published under the MIT License
+
+### SASS Embedded
+
+Used to compile SCSS files.
+
+- [Official Website](https://sass-lang.com/documentation/js-api/)
+- [GitHub Repository](https://github.com/sass/embedded-host-node)
+- SASS Embedded is published under the MIT License
