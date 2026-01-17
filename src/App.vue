@@ -17,16 +17,42 @@
 
 <script setup lang="ts">
 import FooterComponent from './components/FooterComponent.vue'
+import NavBar from './components/NavBar.vue'
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div class="container">
+    <NavBar class="nav" />
+    <div class="main">
+      <router-view />
+    </div>
+    <div class="result">Result</div>
+  </div>
 
   <FooterComponent />
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+.container {
+  display: grid;
+
+  // grid-template-rows: auto 1fr;
+  // grid-template-columns: fill 300px;
+  grid-template: none / auto 300px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .nav {
+    grid-column: 1 / 3;
+  }
+  .main {
+    grid-column: 1 / 2;
+    padding: 1rem;
+  }
+  .result {
+    grid-column: 2 / 3;
+    padding: 1rem;
+  }
+}
+</style>

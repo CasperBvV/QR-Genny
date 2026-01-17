@@ -74,6 +74,14 @@ The build tool used.
 - [GitHub Repository](https://github.com/vitejs/vite)
 - Vite is published under the MIT License
 
+### Vue Router
+
+Used for routing in the application.
+
+- [Official Website](https://router.vuejs.org/)
+- [GitHub Repository](https://github.com/vuejs/router)
+- Vue Router is published under the MIT License
+
 ### SASS Embedded
 
 Used to compile SCSS files.
