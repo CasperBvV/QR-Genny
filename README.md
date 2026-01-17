@@ -1,6 +1,6 @@
-# qr-generator
+# QR Generator
 
-This template should help get you started developing with Vue 3 in Vite.
+A simple QR code generator built with Vue 3 and Vite.
 
 ## Recommended IDE Setup
 
@@ -46,3 +46,30 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Used Resources
+
+The resources used in this project are listed below along with their respective licenses they are originally published under.
+
+### Create Vue
+
+Used to scaffold the project.
+
+- [GitHub Repository](https://github.com/vuejs/create-vue)
+- create-vue is published under the MIT License
+
+### Vue 3
+
+The progressive JavaScript framework used.
+
+- [Official Website](https://vuejs.org/)
+- [GitHub Repository](https://github.com/vuejs/vue)
+- Vue is published under the MIT License
+
+### Vite
+
+The build tool used.
+
+- [Official Website](https://vite.dev/)
+- [GitHub Repository](https://github.com/vitejs/vite)
+- Vite is published under the MIT License
