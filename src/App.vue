@@ -48,6 +48,7 @@ import NavBar from './components/NavBar.vue'
   height: 100%;
 
   @media not screen and (max-width: 768px) {
+    width: 100%;
     max-width: 1200px;
     padding: 25px;
     box-sizing: border-box;
