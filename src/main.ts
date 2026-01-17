@@ -14,7 +14,7 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-import './main.scss'
+import './assets/main.scss'
 
 import { createApp } from 'vue'
 import App from './App.vue'
