@@ -20,22 +20,22 @@ import { ref, watch } from 'vue';
 import FooterComponent from './components/FooterComponent.vue'
 import NavBar from './components/NavBar.vue'
 
-const isHomePage = ref(false)
+const currentPage = ref("");
 import { useRoute } from 'vue-router';
-const route = useRoute();
-isHomePage.value = route.name === 'Home';
 
+const route = useRoute();
 watch(route, (newRoute) => {
-  isHomePage.value = newRoute.name === 'Home';
+  currentPage.value = String(newRoute.name);
+  console.log("Current Page:", currentPage.value);
 });
 
 </script>
 
 <template>
   <div id="wrapper">
-    <RouterView v-if="isHomePage" />
+    <RouterView v-if="currentPage === 'Home'" />
 
-    <div class="content" v-else>
+    <div class="content" v-else-if="currentPage">
       <NavBar class="nav" />
       <div class="main">
         <RouterView />
@@ -43,7 +43,7 @@ watch(route, (newRoute) => {
       <div class="result">Result</div>
     </div>
 
-    <FooterComponent />
+    <FooterComponent class="footer" />
   </div>
 </template>
 
@@ -55,6 +55,10 @@ watch(route, (newRoute) => {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  .footer {
+    margin-top: auto;
+  }
 }
 
 .content {
