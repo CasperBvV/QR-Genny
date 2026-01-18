@@ -49,14 +49,15 @@ a {
 
   &::after {
     // Arrow shape full height
-    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    clip-path: polygon(100% 50%, 0 0, -1px 0, -1px 100%, 0 100%);
     right: -$arrow-size;
   }
 
   &::before {
     // Inverted Arrow shape full height
-    clip-path: polygon(0 0, 100% 50%, 0 100%, 100% 100%, 100% 0);
+    clip-path: polygon(100% 0, 0 50%, 100% 100%, -1px 100%, -1px 0);
     left: -$arrow-size;
+    transform: scaleX(-1);
   }
 }
 </style>
