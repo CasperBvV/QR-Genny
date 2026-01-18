@@ -17,6 +17,15 @@
       <div class="card">
         URL
       </div>
+      <div class="card">
+        URL
+      </div>
+      <div class="card">
+        URL
+      </div>
+      <div class="card">
+        URL
+      </div>
 
       <div class="card">
         <RouterLink to="/content">Go to Content</RouterLink>
@@ -53,12 +62,10 @@
     flex: 1;
 
     box-sizing: border-box;
-    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 1.5rem;
     font-weight: bold;
   }
 
@@ -80,7 +87,7 @@
       border: $card-border;
       border-radius: 8px;
 
-      height: fit-content;
+      height: 150px;
       padding: 1rem;
 
       display: flex;
