@@ -5,7 +5,7 @@ import ArrowButton from './ArrowButton.vue'
 <template>
   <nav>
     <ul>
-      <li><arrow-button path="/">Content</arrow-button></li>
+      <li><arrow-button path="/" first>Content</arrow-button></li>
       <li><arrow-button path="/colour">Colour</arrow-button></li>
       <li><arrow-button path="/style">Style</arrow-button></li>
       <li><arrow-button path="/frame">Frame</arrow-button></li>

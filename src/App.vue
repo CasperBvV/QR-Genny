@@ -56,7 +56,7 @@ import NavBar from './components/NavBar.vue'
 
     display: grid;
     gap: 10px;
-    grid-template: none / auto 300px;
+    grid-template: none / auto min(50%, 350px);
 
     height: fit-content;
 

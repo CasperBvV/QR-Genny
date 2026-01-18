@@ -1,11 +1,12 @@
 <script setup lang="ts">
 defineProps<{
   path: string
+  first?: boolean
 }>()
 </script>
 
 <template>
-  <router-link :to="path">
+  <router-link :to="path" :class="{ first: first }">
     <slot />
   </router-link>
 </template>
@@ -36,7 +37,7 @@ a {
   position: relative;
 
   &::after,
-  &::before {
+  &:not(.first)::before {
     content: '';
     background-color: inherit;
 
