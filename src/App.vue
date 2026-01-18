@@ -16,16 +16,29 @@
 -->
 
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import FooterComponent from './components/FooterComponent.vue'
 import NavBar from './components/NavBar.vue'
+
+const isHomePage = ref(false)
+import { useRoute } from 'vue-router';
+const route = useRoute();
+isHomePage.value = route.name === 'Home';
+
+watch(route, (newRoute) => {
+  isHomePage.value = newRoute.name === 'Home';
+});
+
 </script>
 
 <template>
   <div id="wrapper">
-    <div class="content">
+    <RouterView v-if="isHomePage" />
+
+    <div class="content" v-else>
       <NavBar class="nav" />
       <div class="main">
-        <router-view />
+        <RouterView />
       </div>
       <div class="result">Result</div>
     </div>
