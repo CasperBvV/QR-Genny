@@ -36,12 +36,14 @@ import NavBar from './components/NavBar.vue'
 
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
+
 #wrapper {
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
+
 .content {
   display: flex;
   flex-direction: column;
@@ -62,7 +64,6 @@ import NavBar from './components/NavBar.vue'
     .result {
       background-color: $bg3;
       background: radial-gradient(circle at 50% 100%, $bg4 0%, $bg3 100%);
-      border: 1px solid $bg4;
       height: 100%;
 
       box-sizing: border-box;
@@ -71,18 +72,20 @@ import NavBar from './components/NavBar.vue'
 
   .nav,
   .main,
-  .main,
   .result {
     border-radius: 8px;
+    border: 1px solid $bg4;
   }
 
   .nav {
     grid-column: 1 / 3;
   }
+
   .main {
     grid-column: 1 / 2;
     padding: 1rem;
   }
+
   .result {
     grid-column: 2 / 3;
     padding: 1rem;
