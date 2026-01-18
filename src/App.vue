@@ -26,7 +26,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute();
 watch(route, (newRoute) => {
   currentPage.value = String(newRoute.name);
-  console.log("Current Page:", currentPage.value);
 });
 
 </script>
