@@ -89,3 +89,7 @@ Used to compile SCSS files.
 - [Official Website](https://sass-lang.com/documentation/js-api/)
 - [GitHub Repository](https://github.com/sass/embedded-host-node)
 - SASS Embedded is published under the MIT License
+
+## QR Trademark
+
+'QR Code' is a registered trademark of DENSO WAVE INCORPORATED.
