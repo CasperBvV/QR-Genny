@@ -22,7 +22,7 @@ a {
 
   display: block;
   padding: 0.5rem 1rem;
-  background-color: $color1-darker;
+  background-color: $color1-dark;
 
   &.router-link-active {
     background-color: $color2-dark;

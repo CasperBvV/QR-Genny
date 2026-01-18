@@ -52,18 +52,28 @@ import NavBar from './components/NavBar.vue'
     max-width: 1200px;
     padding: 25px;
     box-sizing: border-box;
-    margin: 0 auto;
+    margin: 15px auto;
 
     display: grid;
     gap: 10px;
-    grid-template: none / auto min(50%, 350px);
-
-    height: fit-content;
+    grid-template: auto 1fr / auto min(50%, 350px);
 
     .main,
     .result {
       background-color: $bg3;
+      background: radial-gradient(circle at 50% 100%, $bg4 0%, $bg3 100%);
+      border: 1px solid $bg4;
+      height: 100%;
+
+      box-sizing: border-box;
     }
+  }
+
+  .nav,
+  .main,
+  .main,
+  .result {
+    border-radius: 8px;
   }
 
   .nav {
@@ -77,7 +87,6 @@ import NavBar from './components/NavBar.vue'
     grid-column: 2 / 3;
     padding: 1rem;
 
-    background-color: $bg3;
     flex-grow: 1;
   }
 }

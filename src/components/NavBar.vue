@@ -21,6 +21,7 @@ import ArrowButton from './ArrowButton.vue'
 nav {
   width: 100%;
   overflow: hidden;
+  height: fit-content;
 
   ul {
     list-style: none;
@@ -38,6 +39,7 @@ nav {
     overflow-x: auto;
   }
 
-  background-color: $bg4;
+  background-color: $bg3;
+  background: radial-gradient(circle at 50% 0, $bg4 0%, $bg3 100%);
 }
 </style>
