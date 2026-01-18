@@ -1,12 +1,16 @@
+<script setup lang="ts">
+import ArrowButton from './ArrowButton.vue'
+</script>
+
 <template>
   <nav>
     <ul>
-      <li><router-link to="/">Content</router-link></li>
-      <li><router-link to="/colour">Colour</router-link></li>
-      <li><router-link to="/style">Style</router-link></li>
-      <li><router-link to="/frame">Frame</router-link></li>
-      <li><router-link to="/icon">Icon</router-link></li>
-      <li><router-link to="/advanced">Advanced Options</router-link></li>
+      <li><arrow-button path="/">Content</arrow-button></li>
+      <li><arrow-button path="/colour">Colour</arrow-button></li>
+      <li><arrow-button path="/style">Style</arrow-button></li>
+      <li><arrow-button path="/frame">Frame</arrow-button></li>
+      <li><arrow-button path="/icon">Icon</arrow-button></li>
+      <li><arrow-button path="/advanced">Advanced Options</arrow-button></li>
     </ul>
   </nav>
 </template>
@@ -19,8 +23,6 @@ nav {
   overflow: hidden;
 
   ul {
-    $arrow-size: 0.5rem;
-
     list-style: none;
 
     display: flex;
@@ -34,52 +36,6 @@ nav {
     box-sizing: border-box;
     overflow-y: hidden;
     overflow-x: auto;
-
-    a {
-      text-decoration: none;
-      color: $color1-lightest;
-
-      text-wrap: nowrap;
-
-      display: block;
-      padding: 0.5rem 1rem;
-      background-color: $color1-darker;
-
-      &.router-link-active {
-        background-color: $color2-dark;
-        color: $color2-lightest;
-        font-weight: bold;
-      }
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      position: relative;
-
-      &::after,
-      &::before {
-        content: '';
-        background-color: inherit;
-
-        width: $arrow-size;
-        height: 100%;
-        position: absolute;
-        top: 0;
-      }
-
-      &::after {
-        // Arrow shape full height
-        clip-path: polygon(100% 50%, 0 0, 0 100%);
-        right: -$arrow-size;
-      }
-
-      &::before {
-        // Inverted Arrow shape full height
-        clip-path: polygon(0 0, 100% 50%, 0 100%, 100% 100%, 100% 0);
-        left: -$arrow-size;
-      }
-    }
   }
 
   background-color: $bg4;
