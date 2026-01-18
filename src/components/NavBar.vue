@@ -37,16 +37,17 @@ nav {
 
     a {
       text-decoration: none;
-      color: $textcolor;
+      color: $color1-lightest;
 
       text-wrap: nowrap;
 
       display: block;
       padding: 0.5rem 1rem;
-      background-color: $color1a;
+      background-color: $color1-darker;
 
       &.router-link-active {
-        background-color: $color1b;
+        background-color: $color2-dark;
+        color: $color2-lightest;
         font-weight: bold;
       }
 
