@@ -16,17 +16,97 @@
 -->
 
 <script setup lang="ts">
+import { ref, watch } from 'vue';
 import FooterComponent from './components/FooterComponent.vue'
+import NavBar from './components/NavBar.vue'
+
+const currentPage = ref("");
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+watch(route, (newRoute) => {
+  currentPage.value = String(newRoute.name);
+});
+
 </script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div id="wrapper">
+    <RouterView v-if="currentPage === 'Home'" />
 
-  <FooterComponent />
+    <div class="content" v-else-if="currentPage">
+      <NavBar class="nav" />
+      <div class="main">
+        <RouterView />
+      </div>
+      <div class="result">Result</div>
+    </div>
+
+    <FooterComponent class="footer" />
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped lang="scss">
+@use '@/assets/variables' as *;
+
+#wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  .footer {
+    margin-top: auto;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @media not screen and (max-width: 768px) {
+    width: 100%;
+    max-width: 1200px;
+    padding: 25px;
+    box-sizing: border-box;
+    margin: 15px auto;
+
+    display: grid;
+    gap: 10px;
+    grid-template: auto 1fr / auto min(50%, 350px);
+
+    .main,
+    .result {
+      background-color: $bg3;
+      background: radial-gradient(circle at 50% 100%, $bg4 0%, $bg3 100%);
+      height: 100%;
+
+      box-sizing: border-box;
+    }
+  }
+
+  .nav,
+  .main,
+  .result {
+    border-radius: 8px;
+    border: 1px solid $bg4;
+  }
+
+  .nav {
+    grid-column: 1 / 3;
+  }
+
+  .main {
+    grid-column: 1 / 2;
+    padding: 1rem;
+  }
+
+  .result {
+    grid-column: 2 / 3;
+    padding: 1rem;
+
+    flex-grow: 1;
+  }
+}
+</style>
