@@ -18,6 +18,8 @@ onMounted(() => {
 
 watch(qrOptions.value, (newOptions) => {
   if (qrCode.value) {
+    // Recreate the QR code instance with new options
+    // This is necessary because QRCodeStyling does not update colors from gradient to solid properly
     qrInstance = new QRCodeStyling(newOptions);
     qrCode.value.innerHTML = '';
     qrInstance.append(qrCode.value);
