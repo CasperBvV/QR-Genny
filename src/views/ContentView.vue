@@ -5,7 +5,7 @@ const currentData = qrData.value.content || {}
 
 interface Field {
   inputType: string
-  placeholder: string
+  label: string
   value: string
 }
 
@@ -13,26 +13,26 @@ const fields: Record<string, Field[]> = {
   url: [
     {
       inputType: 'text',
-      placeholder: 'URL',
+      label: 'URL',
       value: 'url',
     },
   ],
   text: [
     {
       inputType: 'text',
-      placeholder: 'Enter text',
+      label: 'Enter text',
       value: 'text',
     },
   ],
   vcard: [
     {
       inputType: 'text',
-      placeholder: 'Enter name',
+      label: 'Enter name',
       value: 'name',
     },
     {
       inputType: 'text',
-      placeholder: 'Enter phone number',
+      label: 'Enter phone number',
       value: 'phone',
     },
   ],
@@ -42,7 +42,7 @@ const fields: Record<string, Field[]> = {
 
 <template>
   <template v-for="field in fields.vcard" :key="field.value">
-    <ContentInputComponent :inputType="field.inputType" :placeholder="field.placeholder" :value="field.value"
+    <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
       :prefilled="currentData[field.value]" />
   </template>
   <!-- <InputComponent :inputType="fields" placeholder="Enter your name" page="content" value="name"
