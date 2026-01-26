@@ -15,7 +15,7 @@ export const qrOptions = ref({
   width: 300,
   height: 300,
   type: 'canvas' as DrawType,
-  data: 'https://cbuurman.nl',
+  data: 'Hello, World!',
   // image: '/favicon.ico',
   margin: 10,
   qrOptions: {
@@ -48,7 +48,7 @@ export const qrOptions = ref({
   },
   cornersSquareOptions: {
     // color: '#000000',
-    // type: 'square' as CornerSquareType,
+    type: 'square' as CornerSquareType,
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 180,
@@ -57,7 +57,7 @@ export const qrOptions = ref({
   },
   cornersDotOptions: {
     // color: '#000000',
-    // type: 'square' as CornerDotType,
+    type: 'square' as CornerDotType,
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 180,
@@ -127,8 +127,11 @@ function applyUpdates(newData: qrDataType) {
   // Update qrOptions based on qrData content
 
   parseContent(newData.content, newData.home?.type || 'text');
+
   parseDotColorOptions(newData.colour.dotsOptions);
   parseBackgroundColorOptions(newData.colour.backgroundOptions);
+  parseCornerSquareColorOptions(newData.colour.cornersSquareOptions);
+  parseCornerDotColorOptions(newData.colour.cornersDotOptions);
 }
 
 function parseContent(content: Record<string, string>, type: string) {
@@ -230,4 +233,78 @@ function parseBackgroundColorOptions(colorData: colorType) {
   }
 
   qrOptions.value.backgroundOptions = data.value;
+}
+
+function parseCornerSquareColorOptions(colorData: colorType) {
+  const data = ref<{ color?: string; type: CornerSquareType; gradient?: object }>({
+    color: '#000000',
+    type: qrOptions.value.cornersSquareOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1,
+        type: qrOptions.value.cornersSquareOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.cornersSquareOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        color: '#000000',
+        type: qrOptions.value.cornersSquareOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.cornersSquareOptions = data.value;
+}
+
+function parseCornerDotColorOptions(colorData: colorType) {
+  const data = ref<{ color?: string; type: CornerDotType; gradient?: object }>({
+    color: '#000000',
+    type: qrOptions.value.cornersDotOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1,
+        type: qrOptions.value.cornersDotOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.cornersDotOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        color: '#000000',
+        type: qrOptions.value.cornersDotOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.cornersDotOptions = data.value;
 }
