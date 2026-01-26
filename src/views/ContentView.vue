@@ -19,7 +19,7 @@ const fields: Record<string, Field[]> = {
   ],
   text: [
     {
-      inputType: 'text',
+      inputType: 'textarea',
       label: 'Enter text',
       value: 'text',
     },
