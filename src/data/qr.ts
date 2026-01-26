@@ -121,14 +121,15 @@ watch(qrData.value, (newData) => {
   }, 500);
 }, { deep: true });
 
+
 function applyUpdates(newData: qrDataType) {
   console.log('Applying updates to qrOptions:', newData);
   // Update qrOptions based on qrData content
 
-  qrOptions.value.data = parseContent(newData.content, newData.home?.type || 'text');
+  parseContent(newData.content, newData.home?.type || 'text');
 }
 
-function parseContent(content: Record<string, string>, type: string): string {
+function parseContent(content: Record<string, string>, type: string) {
   let dataString = '';
   content = content || {};
 
@@ -150,7 +151,7 @@ function parseContent(content: Record<string, string>, type: string): string {
       dataString = content[type] || 'https://cbuurman.nl';
   }
 
-  return dataString;
+  qrOptions.value.data = dataString;
 }
 
 function generateVCard(content: Record<string, string>): string {
