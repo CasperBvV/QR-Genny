@@ -37,7 +37,7 @@ const isGradient = ref<boolean>(currentData?.type === 'gradient');
 </script>
 
 <template>
-  <InputComponent inputType="radio" value="type" :options="['solid', 'gradient']" default="solid"
+  <InputComponent inputType="radio" :unique="value" value="type" :options="['solid', 'gradient']" default="solid"
     :prefilled="currentData?.type" @update="updateValue" />
 
   <div class="row">

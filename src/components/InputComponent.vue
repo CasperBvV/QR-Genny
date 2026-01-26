@@ -8,6 +8,7 @@ const props = defineProps<{
   label?: string
   placeholder?: string
 
+  unique?: string
   value: string
   prefilled?: string
 }>()
@@ -27,7 +28,7 @@ watch(userInput, (newValue) => {
 <template>
   <div class="radio" v-if="inputType == 'radio'">
     <label v-for="option in options" :key="option">
-      <input type="radio" :name="value" :value="option" v-model="userInput" :checked="userInput === option" />
+      <input type="radio" :name="unique + value" :value="option" v-model="userInput" :checked="userInput === option" />
       {{ option }}
     </label>
   </div>
