@@ -45,6 +45,4 @@ const fields: Record<string, Field[]> = {
     <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
       :prefilled="currentData[field.value]" />
   </template>
-  <!-- <InputComponent :inputType="fields" placeholder="Enter your name" page="content" value="name"
-    :prefilled="currentData.name" /> -->
 </template>
