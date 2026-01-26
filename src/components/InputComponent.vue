@@ -29,6 +29,6 @@ watch(userInput, (newValue) => {
       <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
     </select>
 
-    <input type="text" id="user-input" v-model="userInput" v-else />
+    <input :type="inputType" id="user-input" v-model="userInput" v-else />
   </div>
 </template>
