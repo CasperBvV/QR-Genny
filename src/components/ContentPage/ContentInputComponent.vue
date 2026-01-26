@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { qrData } from '@/main'
-import InputComponent from './InputComponent.vue';
+import InputComponent from '@/components/InputComponent.vue';
 
 const props = defineProps<{
   inputType: string
