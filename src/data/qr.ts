@@ -107,22 +107,58 @@ interface qrDataType {
 
 
 export const qrData = ref<qrDataType>({} as qrDataType)
+const latestUpdate = ref<number>(0);
 watch(qrData.value, (newData) => {
-  const contentString = parseContent(newData.content, newData.home?.type || 'text');
-  qrOptions.value.data = contentString;
-  console.log('QR Data updated:', qrOptions.value.data);
-})
+  latestUpdate.value = Date.now();
+
+  // Wait until no updates for 500ms
+  const currentUpdate = latestUpdate.value;
+  setTimeout(() => {
+    if (currentUpdate === latestUpdate.value) {
+      // Apply updates to qrOptions
+      applyUpdates(newData);
+    }
+  }, 500);
+}, { deep: true });
+
+function applyUpdates(newData: qrDataType) {
+  console.log('Applying updates to qrOptions:', newData);
+  // Update qrOptions based on qrData content
+
+  qrOptions.value.data = parseContent(newData.content, newData.home?.type || 'text');
+}
 
 function parseContent(content: Record<string, string>, type: string): string {
   let dataString = '';
-  if (type === 'vCard') {
-    dataString += 'BEGIN:VCARD\nVERSION:3.0\n';
-    for (const [key, value] of Object.entries(content)) {
-      dataString += `${key}: ${value}\n`;
-    }
-    dataString += 'END:VCARD';
-  } else {
-    dataString = content?.text || 'https://cbuurman.nl';
+  content = content || {};
+
+  switch (type) {
+    case 'text':
+      dataString = content.text || 'Hello, World!';
+      break;
+    case 'url':
+      let input : string = content.url || 'cbuurman.nl';
+      if (!input.startsWith('http://') && !input.startsWith('https://')) {
+        input = 'https://' + input;
+      }
+      dataString = input;
+      break;
+    case 'vCard':
+      dataString = generateVCard(content);
+      break;
+    default:
+      dataString = content[type] || 'https://cbuurman.nl';
   }
+
+  return dataString;
+}
+
+function generateVCard(content: Record<string, string>): string {
+  let dataString = '';
+  dataString += 'BEGIN:VCARD\nVERSION:3.0\n';
+  for (const [key, value] of Object.entries(content)) {
+    dataString += `${key}: ${value}\n`;
+  }
+  dataString += 'END:VCARD';
   return dataString.trim();
 }

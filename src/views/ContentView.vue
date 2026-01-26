@@ -41,7 +41,11 @@ const fields: Record<string, Field[]> = {
 </script>
 
 <template>
-  <template v-for="field in fields.text" :key="field.value">
+  <template v-if="!qrData.home?.type">
+    Please select a content type.
+    <RouterLink to="/">Go to Home</RouterLink>
+  </template>
+  <template v-for="field in fields[qrData.home?.type]" :key="field.value">
     <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
       :prefilled="currentData[field.value]" />
   </template>
