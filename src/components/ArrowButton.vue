@@ -2,11 +2,13 @@
 defineProps<{
   path: string
   first?: boolean
+  left?: boolean
+  highlight?: boolean
 }>()
 </script>
 
 <template>
-  <router-link :to="path" :class="{ first: first }">
+  <router-link :to="path" :class="{ first: first, left: left, highlight: highlight }">
     <slot />
   </router-link>
 </template>
@@ -24,9 +26,13 @@ a {
   padding: 0.5rem 1rem;
   background-color: $color1-dark;
 
-  &.router-link-active {
+  &.router-link-active,
+  &.highlight {
     background-color: $color2-dark;
     color: $color2-lightest;
+  }
+
+  &.router-link-active {
     font-weight: bold;
   }
 
@@ -51,6 +57,14 @@ a {
     // Arrow shape full height
     clip-path: polygon(100% 50%, 0 0, -1px 0, -1px 100%, 0 100%);
     right: -$arrow-size;
+  }
+
+  &.left::after {
+    // Inverted Arrow shape full height
+    clip-path: polygon(100% 50%, 0 0, -1px 0, -1px 100%, 0 100%);
+    right: auto;
+    left: -$arrow-size;
+    transform: scaleX(-1);
   }
 
   &::before {
