@@ -14,7 +14,7 @@ const fields: Record<string, Field[]> = {
     {
       inputType: 'text',
       label: 'URL',
-      value: 'text',
+      value: 'url',
     },
   ],
   text: [
