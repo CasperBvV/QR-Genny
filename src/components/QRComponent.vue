@@ -3,7 +3,7 @@
 import { useTemplateRef, onMounted, watch } from 'vue';
 import QRCodeStyling from 'qr-code-styling';
 
-import { qrOptions } from '@/main';
+import { qrOptions } from '@/data/qr';
 
 const qrCode = useTemplateRef('qrCode');
 
