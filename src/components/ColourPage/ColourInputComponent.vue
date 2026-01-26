@@ -4,7 +4,7 @@ import InputComponent from '@/components/InputComponent.vue';
 import { ref } from 'vue';
 
 const props = defineProps<{
-  value: 'dots' | 'background' | 'corners' | 'cornerDots'
+  value: 'dotsOptions' | 'backgroundOptions' | 'cornersSquareOptions' | 'cornersDotOptions'
 }>()
 
 function updateValue(newValue: string, field?: string) {
@@ -13,10 +13,10 @@ function updateValue(newValue: string, field?: string) {
 
   if (!qrData.value.colour) {
     qrData.value.colour = {
-      dots: {} as colorType,
-      corners: {} as colorType,
-      cornerDots: {} as colorType,
-      background: {} as colorType,
+      dotsOptions: {} as colorType,
+      cornersSquareOptions: {} as colorType,
+      cornersDotOptions: {} as colorType,
+      backgroundOptions: {} as colorType,
     }
   }
 
@@ -26,22 +26,30 @@ function updateValue(newValue: string, field?: string) {
   }
 
   if (field === 'type') {
+    isSolid.value = newValue === 'solid';
     isGradient.value = newValue === 'gradient';
   }
 
 }
 
 const currentData = qrData.value.colour ? qrData.value.colour[props.value] : {} as colorType;
+const isSolid = ref<boolean>(currentData?.type === 'solid');
 const isGradient = ref<boolean>(currentData?.type === 'gradient');
 
+// updateValue(currentData?.type, 'type'); // initialize isGradient
+if (props.value == 'backgroundOptions' && !currentData?.type) {
+  updateValue('default', 'type'); // initialize background type if not set
+  updateValue('#ffffff', 'color1'); // default background color
+}
 </script>
 
 <template>
-  <InputComponent inputType="radio" :unique="value" value="type" :options="['solid', 'gradient']" default="solid"
-    :prefilled="currentData?.type" @update="updateValue" />
+  <InputComponent inputType="radio" :unique="value" value="type" :options="['default', 'solid', 'gradient']"
+    default="default" :prefilled="currentData?.type" @update="updateValue" />
 
   <div class="row">
-    <InputComponent inputType="color" value="color1" :prefilled="currentData?.color1" @update="updateValue" />
+    <InputComponent v-if="isGradient || isSolid" inputType="color" value="color1" :prefilled="currentData?.color1"
+      @update="updateValue" />
     <InputComponent v-if="isGradient" inputType="color" value="color2" :prefilled="currentData?.color2"
       @update="updateValue" />
   </div>

@@ -17,8 +17,10 @@ onMounted(() => {
 });
 
 watch(qrOptions.value, (newOptions) => {
-  if (qrCode.value && qrInstance) {
-    qrInstance.update(newOptions);
+  if (qrCode.value) {
+    qrInstance = new QRCodeStyling(newOptions);
+    qrCode.value.innerHTML = '';
+    qrInstance.append(qrCode.value);
   }
 });
 

@@ -5,14 +5,14 @@ import ColourInputComponent from '@/components/ColourPage/ColourInputComponent.v
 
 <template>
   <h2>Dots Colour</h2>
-  <ColourInputComponent value="dots" />
+  <ColourInputComponent value="dotsOptions" />
 
   <h2>Corners Colour</h2>
-  <ColourInputComponent value="corners" />
+  <ColourInputComponent value="cornersSquareOptions" />
 
   <h2>Corner Dots Colour</h2>
-  <ColourInputComponent value="cornerDots" />
+  <ColourInputComponent value="cornersDotOptions" />
 
   <h2>Background Colour</h2>
-  <ColourInputComponent value="background" />
+  <ColourInputComponent value="backgroundOptions" />
 </template>

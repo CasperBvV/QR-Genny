@@ -30,7 +30,7 @@ export const qrOptions = ref({
     crossOrigin: 'anonymous',
   },
   dotsOptions: {
-    color: '#000000',
+    // color: '#000000',
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 0,
@@ -39,7 +39,7 @@ export const qrOptions = ref({
     type: 'square' as DotType
   },
   backgroundOptions: {
-    color: '#ffffff',
+    // color: '#ffffff',
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 0,
@@ -47,8 +47,8 @@ export const qrOptions = ref({
     // },
   },
   cornersSquareOptions: {
-    color: '#000000',
-    type: 'square' as CornerSquareType,
+    // color: '#000000',
+    // type: 'square' as CornerSquareType,
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 180,
@@ -56,8 +56,8 @@ export const qrOptions = ref({
     // },
   },
   cornersDotOptions: {
-    color: '#000000',
-    type: 'square' as CornerDotType,
+    // color: '#000000',
+    // type: 'square' as CornerDotType,
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 180,
@@ -68,7 +68,7 @@ export const qrOptions = ref({
 
 
 export interface colorType {
-  type: 'solid' | 'gradient',
+  type: 'solid' | 'gradient' | 'default',
   gradientType?: 'linear' | 'radial',
   color1: string,
   color2?: string,
@@ -81,10 +81,10 @@ interface qrDataType {
   }
   content: Record<string, string>
   colour: {
-    dots: colorType
-    corners: colorType
-    cornerDots: colorType
-    background: colorType
+    dotsOptions: colorType
+    cornersSquareOptions: colorType
+    cornersDotOptions: colorType
+    backgroundOptions: colorType
   },
   style: {
     dotStyle: DotType
@@ -127,6 +127,7 @@ function applyUpdates(newData: qrDataType) {
   // Update qrOptions based on qrData content
 
   parseContent(newData.content, newData.home?.type || 'text');
+  parseDotColorOptions(newData.colour.dotsOptions);
 }
 
 function parseContent(content: Record<string, string>, type: string) {
@@ -162,4 +163,41 @@ function generateVCard(content: Record<string, string>): string {
   }
   dataString += 'END:VCARD';
   return dataString.trim();
+}
+
+function parseDotColorOptions(colorData: colorType) {
+  const data = ref<{ color?: string; type: DotType; gradient?: object }>({
+    color: '#000000',
+    type: qrOptions.value.dotsOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1,
+        type: qrOptions.value.dotsOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.dotsOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        color: '#000000',
+        type: qrOptions.value.dotsOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.dotsOptions = data.value;
 }
