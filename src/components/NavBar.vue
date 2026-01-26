@@ -5,7 +5,7 @@ import ArrowButton from './ArrowButton.vue'
 <template>
   <nav>
     <ul>
-      <li><arrow-button path="/" first>Home</arrow-button></li>
+      <li><arrow-button path="/" first>QR-Type</arrow-button></li>
       <li><arrow-button path="/content">Content</arrow-button></li>
       <li><arrow-button path="/colour">Colour</arrow-button></li>
       <li><arrow-button path="/style">Style</arrow-button></li>
