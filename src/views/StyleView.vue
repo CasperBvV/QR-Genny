@@ -7,7 +7,7 @@ import SettingsLayout from '@/components/SettingsLayout.vue';
 <template>
   <SettingsLayout>
     <template #content>
-      <h2>Style Settings Comming Soon</h2>
+      <h2>Style Settings Coming Soon</h2>
       <!-- Style settings components go here -->
     </template>
     <template #buttons>
