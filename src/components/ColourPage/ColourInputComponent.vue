@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { qrData, type colorType } from '@/main'
+import { qrData, type colorType } from '@/data/qr'
 import InputComponent from '@/components/InputComponent.vue';
 import { ref } from 'vue';
 

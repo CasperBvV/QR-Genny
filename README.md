@@ -90,6 +90,12 @@ Used to compile SCSS files.
 - [GitHub Repository](https://github.com/sass/embedded-host-node)
 - SASS Embedded is published under the MIT License
 
+### QR Code Styling
+Used to generate QR codes.
+- [Official Website](https://qr-code-styling.com/)
+- [GitHub Repository](https://github.com/kozakdenys/qr-code-styling)
+- QR Code Styling is published under the MIT License
+
 ## QR Trademark
 
 'QR Code' is a registered trademark of DENSO WAVE INCORPORATED.

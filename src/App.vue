@@ -22,6 +22,7 @@ import NavBar from './components/NavBar.vue'
 
 const currentPage = ref("");
 import { useRoute } from 'vue-router';
+import QRComponent from './components/QRComponent.vue';
 
 const route = useRoute();
 watch(route, (newRoute) => {
@@ -39,7 +40,10 @@ watch(route, (newRoute) => {
       <div class="main">
         <RouterView />
       </div>
-      <div class="result">Result</div>
+      <div class="result">
+        <QRComponent />
+
+      </div>
     </div>
 
     <FooterComponent class="footer" />

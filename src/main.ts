@@ -16,7 +16,7 @@
 
 import './assets/main.scss'
 
-import { createApp, ref, watch } from 'vue'
+import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 
@@ -26,41 +26,5 @@ app.use(router)
 
 app.mount('#app')
 
-export interface colorType {
-  type: 'solid' | 'gradient',
-  gradientType?: 'linear' | 'radial',
-  color1: string,
-  color2?: string,
-  rotation?: number
-}
-
-interface qrDataType {
-  home: {
-    type: string
-  }
-  content: Record<string, string>
-  colour: {
-    dots: colorType
-    corners: colorType
-    cornerDots: colorType
-    background: colorType
-  },
-  style: {
-    dotStyle: string
-    cornerStyle: string
-    cornerDotStyle: string
-  },
-  frame: unknown,
-  icon: unknown,
-  advanced: {
-    type: number
-    errorCorrectionLevel: 'L' | 'M' | 'Q' | 'H'
-    mode: string
-  }
-}
 
 
-export const qrData = ref<qrDataType>({} as qrDataType)
-watch(qrData.value, (newData) => {
-  console.log('main.ts qrData changed:', newData)
-})

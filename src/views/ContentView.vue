@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ContentInputComponent from '@/components/ContentPage/ContentInputComponent.vue'
-import { qrData } from '@/main'
+import { qrData } from '@/data/qr'
 const currentData = qrData.value.content || {}
 
 interface Field {
@@ -41,7 +41,7 @@ const fields: Record<string, Field[]> = {
 </script>
 
 <template>
-  <template v-for="field in fields.vcard" :key="field.value">
+  <template v-for="field in fields.text" :key="field.value">
     <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
       :prefilled="currentData[field.value]" />
   </template>
