@@ -47,7 +47,7 @@ const isGradient = ref<boolean>(currentData?.type === 'gradient');
   </div>
 </template>
 
-<style>
+<style scoped>
 .row {
   display: flex;
   gap: 1rem;
