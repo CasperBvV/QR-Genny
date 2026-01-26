@@ -7,7 +7,7 @@ import SettingsLayout from '@/components/SettingsLayout.vue';
 <template>
   <SettingsLayout>
     <template #content>
-      <h2>Icon Settings Comming Soon</h2>
+      <h2>Icon Settings Coming Soon</h2>
       <!-- Icon settings components go here -->
     </template>
     <template #buttons>
