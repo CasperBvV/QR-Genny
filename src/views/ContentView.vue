@@ -14,7 +14,7 @@ const fields: Record<string, Field[]> = {
     {
       inputType: 'text',
       label: 'URL',
-      value: 'url',
+      value: 'text',
     },
   ],
   text: [
@@ -41,7 +41,7 @@ const fields: Record<string, Field[]> = {
 </script>
 
 <template>
-  <template v-for="field in fields.vcard" :key="field.value">
+  <template v-for="field in fields.text" :key="field.value">
     <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
       :prefilled="currentData[field.value]" />
   </template>
