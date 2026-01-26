@@ -128,6 +128,7 @@ function applyUpdates(newData: qrDataType) {
 
   parseContent(newData.content, newData.home?.type || 'text');
   parseDotColorOptions(newData.colour.dotsOptions);
+  parseBackgroundColorOptions(newData.colour.backgroundOptions);
 }
 
 function parseContent(content: Record<string, string>, type: string) {
@@ -200,4 +201,33 @@ function parseDotColorOptions(colorData: colorType) {
   }
 
   qrOptions.value.dotsOptions = data.value;
+}
+
+function parseBackgroundColorOptions(colorData: colorType) {
+  const data = ref<{ color?: string; gradient?: object }>({});
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {};
+      break;
+  }
+
+  qrOptions.value.backgroundOptions = data.value;
 }
