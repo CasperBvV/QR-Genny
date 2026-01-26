@@ -13,14 +13,14 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  (e: 'update', value: string): void
+  (e: 'update', value: string, field?: string): void
 }>()
 
 const userInput = ref<string>(props.prefilled || props.default || '')
 
 // check if userInput changes and emit update event
 watch(userInput, (newValue) => {
-  emit('update', newValue)
+  emit('update', newValue, props.value)
 })
 </script>
 

@@ -26,7 +26,7 @@ app.use(router)
 
 app.mount('#app')
 
-interface colorType {
+export interface colorType {
   type: 'solid' | 'gradient',
   gradientType?: 'linear' | 'radial',
   color1: string,
