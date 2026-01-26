@@ -38,6 +38,53 @@ watch(userInput, (newValue) => {
       <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
     </select>
 
+    <textarea :id="value" v-model="userInput" :placeholder="props.placeholder"
+      v-else-if="inputType === 'textarea'"></textarea>
+
     <input :type="inputType" :id="value" v-model="userInput" :placeholder="props.placeholder" v-else />
   </div>
 </template>
+
+<style scoped lang="scss">
+@use '@/assets/variables' as *;
+
+.input-component {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  label {
+    font-weight: bold;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 1rem;
+
+    background-color: rgba($bg4, 0.75);
+    color: inherit;
+    border: 1px solid $bg5;
+    box-shadow: 0 0 5px rgba($bg4, 0.75);
+
+    &:focus {
+      outline: none;
+      border-color: $color1;
+      box-shadow: 0 0 5px rgba($color1, 0.75);
+    }
+
+    &[type='color'] {
+      padding: 0;
+      height: 40px;
+      width: 100px;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+}
+</style>
