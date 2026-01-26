@@ -7,7 +7,7 @@ import SettingsLayout from '@/components/SettingsLayout.vue';
 <template>
   <SettingsLayout>
     <template #content>
-      <h2>Frame Settings Comming Soon</h2>
+      <h2>Frame Settings Coming Soon</h2>
       <!-- Frame settings components go here -->
     </template>
     <template #buttons>
