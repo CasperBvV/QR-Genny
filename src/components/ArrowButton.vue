@@ -4,11 +4,15 @@ defineProps<{
   first?: boolean
   left?: boolean
   highlight?: boolean
+  disabled?: boolean
 }>()
 </script>
 
 <template>
-  <router-link :to="path" :class="{ first: first, left: left, highlight: highlight }">
+  <div v-if="disabled" :class="{ first: first, left: left, highlight: highlight, disabled: disabled }">
+    <slot></slot>
+  </div>
+  <router-link :to="path" :class="{ first: first, left: left, highlight: highlight }" v-else>
     <slot />
   </router-link>
 </template>
@@ -16,7 +20,8 @@ defineProps<{
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
 
-a {
+a,
+div {
   text-decoration: none;
   color: $color1-lightest;
 
@@ -25,6 +30,11 @@ a {
   display: block;
   padding: 0.5rem 1rem;
   background-color: $color1-dark;
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.25;
+  }
 
   &.router-link-active,
   &.highlight {
