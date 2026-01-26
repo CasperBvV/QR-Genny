@@ -5,6 +5,7 @@ import InputComponent from '@/components/InputComponent.vue';
 const props = defineProps<{
   inputType: string
   options?: string[]
+  label?: string
   placeholder?: string
 
   value: string
@@ -21,6 +22,6 @@ function updateValue(newValue: string) {
 </script>
 
 <template>
-  <InputComponent :inputType="inputType" :options="options" :placeholder="placeholder" :value="value"
+  <InputComponent :inputType="inputType" :label="label" :options="options" :placeholder="placeholder" :value="value"
     :prefilled="prefilled" @update="updateValue" />
 </template>
