@@ -171,7 +171,6 @@ function generateVCard(content: Record<string, string>): string {
 
 function parseDotColorOptions(colorData: colorType) {
   const data = ref<{ color?: string; type: DotType; gradient?: object }>({
-    color: '#000000',
     type: qrOptions.value.dotsOptions.type
   });
 
@@ -197,7 +196,6 @@ function parseDotColorOptions(colorData: colorType) {
       break;
     case 'default':
       data.value = {
-        color: '#000000',
         type: qrOptions.value.dotsOptions.type
       };
       break;
@@ -237,7 +235,6 @@ function parseBackgroundColorOptions(colorData: colorType) {
 
 function parseCornerSquareColorOptions(colorData: colorType) {
   const data = ref<{ color?: string; type: CornerSquareType; gradient?: object }>({
-    color: '#000000',
     type: qrOptions.value.cornersSquareOptions.type
   });
 
@@ -263,7 +260,6 @@ function parseCornerSquareColorOptions(colorData: colorType) {
       break;
     case 'default':
       data.value = {
-        color: '#000000',
         type: qrOptions.value.cornersSquareOptions.type
       };
       break;
@@ -274,7 +270,6 @@ function parseCornerSquareColorOptions(colorData: colorType) {
 
 function parseCornerDotColorOptions(colorData: colorType) {
   const data = ref<{ color?: string; type: CornerDotType; gradient?: object }>({
-    color: '#000000',
     type: qrOptions.value.cornersDotOptions.type
   });
 
@@ -300,7 +295,6 @@ function parseCornerDotColorOptions(colorData: colorType) {
       break;
     case 'default':
       data.value = {
-        color: '#000000',
         type: qrOptions.value.cornersDotOptions.type
       };
       break;
