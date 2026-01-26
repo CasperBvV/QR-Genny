@@ -149,7 +149,7 @@ function parseContent(content: Record<string, string>, type: string) {
       }
       dataString = input;
       break;
-    case 'vCard':
+    case 'vcard':
       dataString = generateVCard(content);
       break;
     default:
