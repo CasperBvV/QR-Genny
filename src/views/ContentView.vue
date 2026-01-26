@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import ContentInputComponent from '@/components/ContentPage/ContentInputComponent.vue'
 import { qrData } from '@/main'
-const currentData = qrData.value['content'] || {}
+const currentData = qrData.value.content || {}
 
 interface Field {
   inputType: string
