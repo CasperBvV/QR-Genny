@@ -7,19 +7,18 @@ import { qrOptions } from '@/main';
 
 const qrCode = useTemplateRef('qrCode');
 
+let qrInstance: QRCodeStyling | null = null;
+
 onMounted(() => {
   if (qrCode.value) {
-    const qr = new QRCodeStyling(qrOptions.value);
-    qr.append(qrCode.value);
+    qrInstance = new QRCodeStyling(qrOptions.value);
+    qrInstance.append(qrCode.value);
   }
 });
 
 watch(qrOptions.value, (newOptions) => {
-  console.log('QR options changed:', newOptions);
-  if (qrCode.value) {
-    const qr = new QRCodeStyling(newOptions);
-    qrCode.value.innerHTML = '';
-    qr.append(qrCode.value);
+  if (qrCode.value && qrInstance) {
+    qrInstance.update(newOptions);
   }
 });
 
