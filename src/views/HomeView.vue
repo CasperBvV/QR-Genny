@@ -1,28 +1,45 @@
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faLink } from '@fortawesome/free-solid-svg-icons'
+import { faLink, faClipboard, faIdCard } from '@fortawesome/free-solid-svg-icons'
+
+import { qrData } from '@/data/qr';
+
+function updateType(type: string) {
+  // Navigation logic can be added here if needed
+  qrData.value.home = {
+    ...qrData.value.home,
+    type,
+  }
+}
+
+const types = {
+  url: {
+    icon: faLink,
+    label: 'URL',
+  },
+  text: {
+    icon: faClipboard,
+    label: 'Text',
+  },
+  vcard: {
+    icon: faIdCard,
+    label: 'vCard',
+  },
+}
+
 </script>
 
 <template>
   <div class="wrapper">
     <div class="types column">
-      <div class="card">
+      <RouterLink v-for="type in types" :key="type.label" to="/content" class="card"
+        @click="updateType(type.label.toLowerCase())">
         <div class="icon">
-          <FontAwesomeIcon :icon="faLink" />
+          <FontAwesomeIcon :icon="type.icon" />
         </div>
-        URL
-      </div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
-      <div class="card">URL</div>
+        {{ type.label }}
 
-      <div class="card">
-        <RouterLink to="/content">Go to Content</RouterLink>
-      </div>
+      </RouterLink>
     </div>
 
     <div class="column">Image</div>
@@ -87,6 +104,8 @@ import { faLink } from '@fortawesome/free-solid-svg-icons'
       gap: 10px;
 
       cursor: pointer;
+      text-decoration: none;
+      color: inherit;
 
       position: relative;
 
@@ -116,11 +135,30 @@ import { faLink } from '@fortawesome/free-solid-svg-icons'
         }
 
         transform: scale(1.03);
+
+        .icon svg * {
+          fill: $color2;
+        }
+      }
+
+      .icon {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        overflow: hidden;
+
+        flex-grow: 1;
       }
 
       .icon svg {
         width: 50px;
         height: auto;
+
+        * {
+          transition: fill 0.2s ease;
+          fill: $color1;
+        }
       }
     }
   }

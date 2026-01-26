@@ -2,11 +2,17 @@
 defineProps<{
   path: string
   first?: boolean
+  left?: boolean
+  highlight?: boolean
+  disabled?: boolean
 }>()
 </script>
 
 <template>
-  <router-link :to="path" :class="{ first: first }">
+  <div v-if="disabled" :class="{ first: first, left: left, highlight: highlight, disabled: disabled }">
+    <slot></slot>
+  </div>
+  <router-link :to="path" :class="{ first: first, left: left, highlight: highlight }" v-else>
     <slot />
   </router-link>
 </template>
@@ -14,7 +20,8 @@ defineProps<{
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
 
-a {
+a,
+div {
   text-decoration: none;
   color: $color1-lightest;
 
@@ -24,9 +31,18 @@ a {
   padding: 0.5rem 1rem;
   background-color: $color1-dark;
 
-  &.router-link-active {
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.25;
+  }
+
+  &.router-link-active,
+  &.highlight {
     background-color: $color2-dark;
     color: $color2-lightest;
+  }
+
+  &.router-link-active {
     font-weight: bold;
   }
 
@@ -51,6 +67,14 @@ a {
     // Arrow shape full height
     clip-path: polygon(100% 50%, 0 0, -1px 0, -1px 100%, 0 100%);
     right: -$arrow-size;
+  }
+
+  &.left::after {
+    // Inverted Arrow shape full height
+    clip-path: polygon(100% 50%, 0 0, -1px 0, -1px 100%, 0 100%);
+    right: auto;
+    left: -$arrow-size;
+    transform: scaleX(-1);
   }
 
   &::before {

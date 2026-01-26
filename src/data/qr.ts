@@ -15,7 +15,7 @@ export const qrOptions = ref({
   width: 300,
   height: 300,
   type: 'canvas' as DrawType,
-  data: 'https://cbuurman.nl',
+  data: 'Hello, World!',
   // image: '/favicon.ico',
   margin: 10,
   qrOptions: {
@@ -30,7 +30,7 @@ export const qrOptions = ref({
     crossOrigin: 'anonymous',
   },
   dotsOptions: {
-    color: '#000000',
+    // color: '#000000',
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 0,
@@ -39,7 +39,7 @@ export const qrOptions = ref({
     type: 'square' as DotType
   },
   backgroundOptions: {
-    color: '#ffffff',
+    // color: '#ffffff',
     // gradient: {
     //   type: 'linear', // 'radial'
     //   rotation: 0,
@@ -47,7 +47,7 @@ export const qrOptions = ref({
     // },
   },
   cornersSquareOptions: {
-    color: '#000000',
+    // color: '#000000',
     type: 'square' as CornerSquareType,
     // gradient: {
     //   type: 'linear', // 'radial'
@@ -56,7 +56,7 @@ export const qrOptions = ref({
     // },
   },
   cornersDotOptions: {
-    color: '#000000',
+    // color: '#000000',
     type: 'square' as CornerDotType,
     // gradient: {
     //   type: 'linear', // 'radial'
@@ -68,7 +68,7 @@ export const qrOptions = ref({
 
 
 export interface colorType {
-  type: 'solid' | 'gradient',
+  type: 'solid' | 'gradient' | 'default',
   gradientType?: 'linear' | 'radial',
   color1: string,
   color2?: string,
@@ -81,10 +81,10 @@ interface qrDataType {
   }
   content: Record<string, string>
   colour: {
-    dots: colorType
-    corners: colorType
-    cornerDots: colorType
-    background: colorType
+    dotsOptions: colorType
+    cornersSquareOptions: colorType
+    cornersDotOptions: colorType
+    backgroundOptions: colorType
   },
   style: {
     dotStyle: DotType
@@ -107,22 +107,206 @@ interface qrDataType {
 
 
 export const qrData = ref<qrDataType>({} as qrDataType)
+const latestUpdate = ref<number>(0);
 watch(qrData.value, (newData) => {
-  const contentString = parseContent(newData.content, newData.home?.type || 'text');
-  qrOptions.value.data = contentString;
-  console.log('QR Data updated:', qrOptions.value.data);
-})
+  latestUpdate.value = Date.now();
 
-function parseContent(content: Record<string, string>, type: string): string {
-  let dataString = '';
-  if (type === 'vCard') {
-    dataString += 'BEGIN:VCARD\nVERSION:3.0\n';
-    for (const [key, value] of Object.entries(content)) {
-      dataString += `${key}: ${value}\n`;
+  // Wait until no updates for 500ms
+  const currentUpdate = latestUpdate.value;
+  setTimeout(() => {
+    if (currentUpdate === latestUpdate.value) {
+      // Apply updates to qrOptions
+      applyUpdates(newData);
     }
-    dataString += 'END:VCARD';
-  } else {
-    dataString = content?.text || 'https://cbuurman.nl';
+  }, 500);
+}, { deep: true });
+
+
+function applyUpdates(newData: qrDataType) {
+  console.log('Applying updates to qrOptions:', newData);
+  // Update qrOptions based on qrData content
+
+  parseContent(newData.content, newData.home?.type || 'text');
+
+  parseDotColorOptions(newData.colour?.dotsOptions);
+  parseBackgroundColorOptions(newData.colour?.backgroundOptions);
+  parseCornerSquareColorOptions(newData.colour?.cornersSquareOptions);
+  parseCornerDotColorOptions(newData.colour?.cornersDotOptions);
+}
+
+function parseContent(content: Record<string, string>, type: string) {
+  let dataString = '';
+  content = content || {};
+
+  switch (type) {
+    case 'text':
+      dataString = content.text || 'Hello, World!';
+      break;
+    case 'url':
+      let input : string = content.url || 'cbuurman.nl';
+      if (!input.startsWith('http://') && !input.startsWith('https://')) {
+        input = 'https://' + input;
+      }
+      dataString = input;
+      break;
+    case 'vcard':
+      dataString = generateVCard(content);
+      break;
+    default:
+      dataString = content[type] || 'https://cbuurman.nl';
   }
+
+  qrOptions.value.data = dataString;
+}
+
+function generateVCard(content: Record<string, string>): string {
+  let dataString = '';
+  dataString += 'BEGIN:VCARD\nVERSION:3.0\n';
+  for (const [key, value] of Object.entries(content)) {
+    dataString += `${key}: ${value}\n`;
+  }
+  dataString += 'END:VCARD';
   return dataString.trim();
+}
+
+function parseDotColorOptions(colorData: colorType) {
+  if (!colorData?.type) return;
+
+  const data = ref<{ color?: string; type: DotType; gradient?: object }>({
+    type: qrOptions.value.dotsOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1 || '#000000',
+        type: qrOptions.value.dotsOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.dotsOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        type: qrOptions.value.dotsOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.dotsOptions = data.value;
+}
+
+function parseBackgroundColorOptions(colorData: colorType) {
+  if (!colorData?.type) return;
+
+  const data = ref<{ color?: string; gradient?: object }>({});
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {};
+      break;
+  }
+
+  qrOptions.value.backgroundOptions = data.value;
+}
+
+function parseCornerSquareColorOptions(colorData: colorType) {
+  if (!colorData?.type) return;
+
+  const data = ref<{ color?: string; type: CornerSquareType; gradient?: object }>({
+    type: qrOptions.value.cornersSquareOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1 || '#000000',
+        type: qrOptions.value.cornersSquareOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.cornersSquareOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        type: qrOptions.value.cornersSquareOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.cornersSquareOptions = data.value;
+}
+
+function parseCornerDotColorOptions(colorData: colorType) {
+  if (!colorData?.type) return;
+
+  const data = ref<{ color?: string; type: CornerDotType; gradient?: object }>({
+    type: qrOptions.value.cornersDotOptions.type
+  });
+
+  switch (colorData.type) {
+    case 'solid':
+      data.value = {
+        color: colorData.color1 || '#000000',
+        type: qrOptions.value.cornersDotOptions.type
+      };
+      break;
+    case 'gradient':
+      data.value = {
+        type: qrOptions.value.cornersDotOptions.type,
+        gradient: {
+          type: colorData.gradientType || 'linear',
+          rotation: colorData.rotation || 0,
+          colorStops: [
+            { offset: 0, color: colorData.color1 },
+            { offset: 1, color: colorData.color2 || colorData.color1 }
+          ]
+        }
+      };
+      break;
+    case 'default':
+      data.value = {
+        type: qrOptions.value.cornersDotOptions.type
+      };
+      break;
+  }
+
+  qrOptions.value.cornersDotOptions = data.value;
 }
