@@ -35,17 +35,17 @@ interface colorType {
 }
 
 interface qrDataType {
-  ['home']: {
+  home: {
     type: string
   }
-  ['content']: Record<string, string>
-  ['colour']: {
+  content: Record<string, string>
+  colour: {
     dots: colorType
     corners: colorType
     cornerDots: colorType
     background: colorType
   },
-  ['style']: {
+  style: {
     dotStyle: string
     cornerStyle: string
     cornerDotStyle: string
