@@ -7,7 +7,7 @@ import SettingsLayout from '@/components/SettingsLayout.vue';
 <template>
   <SettingsLayout>
     <template #content>
-      <h2>Advanced Options Comming Soon</h2>
+      <h2>Advanced Options Coming Soon</h2>
       <!-- Advanced options components go here -->
     </template>
     <template #buttons>
