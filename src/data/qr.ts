@@ -177,7 +177,7 @@ function parseDotColorOptions(colorData: colorType) {
   switch (colorData.type) {
     case 'solid':
       data.value = {
-        color: colorData.color1,
+        color: colorData.color1 || '#000000',
         type: qrOptions.value.dotsOptions.type
       };
       break;
@@ -241,7 +241,7 @@ function parseCornerSquareColorOptions(colorData: colorType) {
   switch (colorData.type) {
     case 'solid':
       data.value = {
-        color: colorData.color1,
+        color: colorData.color1 || '#000000',
         type: qrOptions.value.cornersSquareOptions.type
       };
       break;
@@ -276,7 +276,7 @@ function parseCornerDotColorOptions(colorData: colorType) {
   switch (colorData.type) {
     case 'solid':
       data.value = {
-        color: colorData.color1,
+        color: colorData.color1 || '#000000',
         type: qrOptions.value.cornersDotOptions.type
       };
       break;
