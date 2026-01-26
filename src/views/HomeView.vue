@@ -60,7 +60,6 @@ import { faLink } from '@fortawesome/free-solid-svg-icons'
   }
 
   .types {
-    min-width: none;
     flex: 2;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
