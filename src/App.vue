@@ -80,6 +80,7 @@ watch(route, (newRoute) => {
 
     display: grid;
     gap: 10px;
+    overflow: hidden;
     grid-template: auto 1fr / auto min(50%, 350px);
 
     .main,
@@ -105,7 +106,7 @@ watch(route, (newRoute) => {
 
   .main {
     grid-column: 1 / 2;
-    padding: 1rem;
+    overflow: hidden;
   }
 
   .result {
