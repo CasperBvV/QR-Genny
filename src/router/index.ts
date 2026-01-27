@@ -1,3 +1,19 @@
+/**
+ *   Copyright (C) 2026  Casper Buurman
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU Affero General Public License as
+ *   published by the Free Software Foundation, either version 3 of the
+ *   License, or (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU Affero General Public License for more details.
+ *
+ *   You should have received a copy of the GNU Affero General Public License
+ *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
@@ -7,6 +23,9 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: () => import('../views/HomeView.vue'),
+      meta: {
+        fullPage: true,
+      },
     },
     {
       path: '/content',
@@ -37,6 +56,15 @@ const router = createRouter({
       path: '/advanced',
       name: 'Advanced Options',
       component: () => import('../views/AdvancedOptionsView.vue'),
+    },
+
+    {
+      path: '/legal',
+      name: 'Legal',
+      component: () => import('../views/LegalView.vue'),
+      meta: {
+        fullPage: true,
+      },
     },
   ],
 })

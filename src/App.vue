@@ -20,22 +20,22 @@ import { ref, watch } from 'vue';
 import FooterComponent from './components/FooterComponent.vue'
 import NavBar from './components/NavBar.vue'
 
-const currentPage = ref("");
+const fullPage = ref<boolean>();
 import { useRoute } from 'vue-router';
 import QRComponent from './components/QRComponent.vue';
 
 const route = useRoute();
 watch(route, (newRoute) => {
-  currentPage.value = String(newRoute.name);
+  fullPage.value = Boolean(newRoute.meta.fullPage);
 });
 
 </script>
 
 <template>
   <div id="wrapper">
-    <RouterView v-if="currentPage === 'Home'" />
+    <RouterView v-if="fullPage === true" />
 
-    <div class="content" v-else-if="currentPage">
+    <div class="content" v-else-if="fullPage === false">
       <NavBar class="nav" />
       <div class="main">
         <RouterView />
