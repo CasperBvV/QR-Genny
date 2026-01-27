@@ -25,7 +25,6 @@ import {
   type DotType,
   type CornerSquareType,
   type CornerDotType,
-  // Extension
 } from 'qr-code-styling';
 
 export const qrOptions = ref({

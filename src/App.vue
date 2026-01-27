@@ -16,18 +16,27 @@
 -->
 
 <script setup lang="ts">
-import { ref, watch } from 'vue';
+import { ref, useTemplateRef, watch } from 'vue';
 import FooterComponent from './components/FooterComponent.vue'
 import NavBar from './components/NavBar.vue'
 
 const fullPage = ref<boolean>();
 import { useRoute } from 'vue-router';
 import QRComponent from './components/QRComponent.vue';
+import ExportButtons from './components/ExportButtons.vue';
 
 const route = useRoute();
+const qrComponent = useTemplateRef<InstanceType<typeof QRComponent>>('qrComponent');
+
 watch(route, (newRoute) => {
   fullPage.value = Boolean(newRoute.meta.fullPage);
 });
+
+function downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
+  if (qrComponent.value) {
+    qrComponent.value.downloadQR(format);
+  }
+}
 
 </script>
 
@@ -41,7 +50,9 @@ watch(route, (newRoute) => {
         <RouterView />
       </div>
       <div class="result">
-        <QRComponent />
+        <QRComponent ref="qrComponent" />
+
+        <ExportButtons @download="downloadQR" />
 
       </div>
     </div>
@@ -54,11 +65,16 @@ watch(route, (newRoute) => {
 @use '@/assets/variables' as *;
 
 #wrapper {
-  height: 100vh;
+  height: fit-content;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  @media not screen and (max-width: 768px) {
+    height: 100vh;
+  }
+
 }
 
 .fullcontent {
@@ -88,6 +104,7 @@ watch(route, (newRoute) => {
       background-color: $bg3;
       background: radial-gradient(circle at 50% 100%, $bg4 0%, $bg3 100%);
       height: 100%;
+      overflow: hidden;
 
       box-sizing: border-box;
     }
@@ -113,7 +130,17 @@ watch(route, (newRoute) => {
     grid-column: 2 / 3;
     padding: 1rem;
 
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    @extend .scrollbar;
+    overflow: auto;
   }
+}
+
+.footer {
+  margin-top: auto;
 }
 </style>
