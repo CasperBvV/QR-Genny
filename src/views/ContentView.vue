@@ -27,6 +27,7 @@ interface Field {
   label: string
   value: string
   placeholder?: string
+  hideLine?: boolean
 }
 
 const fields: Record<string, Field[]> = {
@@ -47,7 +48,7 @@ const fields: Record<string, Field[]> = {
     },
   ],
   vcard: [
-    { inputType: 'spacer', label: 'Name', value: 'hideLine', },
+    { inputType: 'spacer', label: 'Name', value: '', hideLine: true },
     {
       inputType: 'text',
       label: 'First Name',
@@ -159,7 +160,7 @@ const fields: Record<string, Field[]> = {
       <div :class="qrData.home?.type">
         <template v-for="(field, index) in fields[qrData.home?.type]" :key="field.inputType + '-' + index">
           <div v-if="field.inputType === 'spacer'" class="spacer">
-            <hr v-if="field.value !== 'hideLine'" />
+            <hr v-if="!field.hideLine" />
             <h2 v-if="field.label !== ''">{{ field.label }}</h2>
           </div>
           <ContentInputComponent v-else :class="field.value" :inputType="field.inputType" :label="field.label"
