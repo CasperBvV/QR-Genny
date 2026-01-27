@@ -15,56 +15,6 @@
  *   along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-
-
-/*
-### Create Vue
-
-Used to scaffold the project.
-
-- [GitHub Repository](https://github.com/vuejs/create-vue)
-- create-vue is published under the MIT License
-
-### Vue 3
-
-The progressive JavaScript framework used.
-
-- [Official Website](https://vuejs.org/)
-- [GitHub Repository](https://github.com/vuejs/vue)
-- Vue is published under the MIT License
-
-### Vite
-
-The build tool used.
-
-- [Official Website](https://vite.dev/)
-- [GitHub Repository](https://github.com/vitejs/vite)
-- Vite is published under the MIT License
-
-### Vue Router
-
-Used for routing in the application.
-
-- [Official Website](https://router.vuejs.org/)
-- [GitHub Repository](https://github.com/vuejs/router)
-- Vue Router is published under the MIT License
-
-### SASS Embedded
-
-Used to compile SCSS files.
-
-- [Official Website](https://sass-lang.com/documentation/js-api/)
-- [GitHub Repository](https://github.com/sass/embedded-host-node)
-- SASS Embedded is published under the MIT License
-
-### QR Code Styling
-Used to generate QR codes.
-- [Official Website](https://qr-code-styling.com/)
-- [GitHub Repository](https://github.com/kozakdenys/qr-code-styling)
-- QR Code Styling is published under the MIT License
-
-*/
-
 const dependencies = [
   {
     name: 'Create Vue',
