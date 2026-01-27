@@ -139,4 +139,8 @@ function downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
     overflow: auto;
   }
 }
+
+.footer {
+  margin-top: auto;
+}
 </style>
