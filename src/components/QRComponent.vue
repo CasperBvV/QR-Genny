@@ -43,6 +43,16 @@ watch(qrOptions.value, (newOptions) => {
   }
 });
 
+// Listen for download events sibling component
+defineExpose({
+  downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
+    if (qrInstance) {
+      qrInstance.download({ extension: format });
+    }
+  }
+});
+
+
 </script>
 
 <template>
