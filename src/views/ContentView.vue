@@ -162,8 +162,8 @@ const fields: Record<string, Field[]> = {
             <hr v-if="field.value !== 'hideLine'" />
             <h2 v-if="field.label !== ''">{{ field.label }}</h2>
           </div>
-          <ContentInputComponent v-else :class="field.value" :inputType="field.inputType" :label="field.label" :value="field.value"
-            :prefilled="currentData[field.value]" :placeholder="field.placeholder" />
+          <ContentInputComponent v-else :class="field.value" :inputType="field.inputType" :label="field.label"
+            :value="field.value" :prefilled="currentData[field.value]" :placeholder="field.placeholder" />
         </template>
       </div>
     </template>
@@ -189,7 +189,6 @@ const fields: Record<string, Field[]> = {
 
   .spacer {
     grid-column: 1 / 3;
-    // background-color: $color1;
     display: flex;
     flex-direction: column;
 
@@ -198,13 +197,12 @@ const fields: Record<string, Field[]> = {
       width: 100%;
       border-top: 1px solid $color2;
     }
+
     h2 {
       margin: 0;
-      // padding: 0.5rem 0;
       color: $color1;
       font-weight: bold;
     }
   }
 }
 </style>
-
