@@ -38,10 +38,10 @@ const types = {
     icon: faClipboard,
     label: 'Text',
   },
-  vcard: {
-    icon: faIdCard,
-    label: 'vCard',
-  },
+  // vcard: {
+  //   icon: faIdCard,
+  //   label: 'vCard',
+  // },
 }
 
 </script>
