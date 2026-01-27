@@ -29,10 +29,10 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
       <span>'QR Code' is a registered trademark of DENSO WAVE INCORPORATED</span>
     </div>
     <div class="links">
-      <a class="socialIcon" href="https://cbuurman.nl" target="_blank" rel="noopener noreferrer">
+      <a class="socialIcon" href="https://cbuurman.nl" target="_blank" rel="noopener noreferrer" aria-label="Visit my personal website">
         <img src="@/assets/img/cbuurman.svg" alt="cbuurman.nl" class="icon" />
       </a>
-      <a class="socialIcon" href="https://github.com/CasperBvV/QR-Genny" target="_blank" rel="noopener noreferrer">
+      <a class="socialIcon" href="https://github.com/CasperBvV/QR-Genny" target="_blank" rel="noopener noreferrer" aria-label="View this project on GitHub">
         <FontAwesomeIcon class="icon" style="color: white" :icon="faGithub" />
       </a>
       <RouterLink to="/legal" target="_blank" rel="noopener noreferrer">Legal Information</RouterLink>
