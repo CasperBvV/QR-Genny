@@ -33,7 +33,7 @@ watch(route, (newRoute) => {
 
 <template>
   <div id="wrapper">
-    <RouterView v-if="currentPage === 'Home'" />
+    <RouterView v-if="currentPage === 'Home' || currentPage === 'Legal'" />
 
     <div class="content" v-else-if="currentPage">
       <NavBar class="nav" />
