@@ -135,19 +135,7 @@ const trademarks = [
 
   overflow-y: auto;
 
-  // Scrollbar styling
-  scrollbar-width: thin;
-  scrollbar-color: $color1 transparent;
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-  &::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: $color1;
-    border-radius: 2px;
-  }
+  @extend .scrollbar;
 
   .legal-view {
     display: flex;

@@ -176,12 +176,54 @@ function parseContent(content: Record<string, string>, type: string) {
   qrOptions.value.data = dataString;
 }
 
+function escapeVCardText(text: string | undefined): string {
+  return text
+    ? text
+        .replace(/\\/g, '\\\\')
+        .replace(/,/g, '\\,')
+        .replace(/;/g, '\\;')
+        .replace(/\n/g, '\\n')
+    : '';
+}
 function generateVCard(content: Record<string, string>): string {
   let dataString = '';
   dataString += 'BEGIN:VCARD\nVERSION:3.0\n';
-  for (const [key, value] of Object.entries(content)) {
-    dataString += `${key}: ${value}\n`;
+
+
+  // Name
+  dataString += `N:${escapeVCardText(content.lname)};${escapeVCardText(content.fname)};${escapeVCardText(content.mname)};${escapeVCardText(content.prefix)};${escapeVCardText(content.suffix)}\n`;
+  const fullName = [escapeVCardText(content.prefix), escapeVCardText(content.fname), escapeVCardText(content.mname), escapeVCardText(content.lname), escapeVCardText(content.suffix)].filter(Boolean).join(' ');
+  dataString += `FN:${fullName}\n`;
+
+  if (content.nickname) {
+    dataString += `NICKNAME:${escapeVCardText(content.nickname)}\n`;
   }
+
+  // Contact details
+  if (content.phone) {
+    dataString += `TEL;TYPE=CELL:${escapeVCardText(content.phone)}\n`;
+  }
+  if (content.email) {
+    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeVCardText(content.email)}\n`;
+  }
+  if (content.website) {
+    dataString += `URL:${escapeVCardText(content.website)}\n`;
+  }
+
+  // Work details
+  if (content.org || content.department || content.subDepartment) {
+    dataString += `ORG:${escapeVCardText(content.org)};${escapeVCardText(content.department)};${escapeVCardText(content.subDepartment)}\n`;
+  }
+  if (content.title) {
+    dataString += `TITLE:${escapeVCardText(content.title)}\n`;
+  }
+  if (content.workEmail) {
+    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeVCardText(content.workEmail)}\n`;
+  }
+  if (content.workPhone) {
+    dataString += `TEL;TYPE=WORK,VOICE:${escapeVCardText(content.workPhone)}\n`;
+  }
+
   dataString += 'END:VCARD';
   return dataString.trim();
 }

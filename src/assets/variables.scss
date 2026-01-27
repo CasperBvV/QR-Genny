@@ -28,3 +28,28 @@ $card-border: 1px solid $bg4;
 $card-background: $bg3;
 $card-hover-background: $bg4;
 $card-background-gradient: radial-gradient(circle at 50% 100%, $bg4 0%, $bg3 100%);
+
+
+
+.scrollbar {
+  // Scrollbar styling
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color1;
+    border: 2px solid $bg3;
+    border-radius: 4px;
+  }
+  &::-webkit-scrollbar-buttons {
+    display: none;
+  }
+
+  scrollbar-width: thin;
+  scrollbar-color: $color1 transparent;
+
+
+}

@@ -27,6 +27,8 @@
 </template>
 
 <style scoped lang="scss">
+@use '@/assets/variables' as *;
+
 .settings-layout {
   display: flex;
   flex-direction: column;
@@ -35,12 +37,16 @@
 
   .content {
     flex-grow: 1;
+    padding: 1rem;
+    overflow: auto;
+    @extend .scrollbar;
   }
 
   .buttons {
     display: flex;
     justify-content: flex-end;
     gap: 1rem;
+    padding: 1rem;
   }
 }
 </style>

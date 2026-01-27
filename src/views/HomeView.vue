@@ -38,10 +38,10 @@ const types = {
     icon: faClipboard,
     label: 'Text',
   },
-  // vcard: {
-  //   icon: faIdCard,
-  //   label: 'vCard',
-  // },
+  vcard: {
+    icon: faIdCard,
+    label: 'Business Card',
+  },
 }
 
 </script>
@@ -49,8 +49,8 @@ const types = {
 <template>
   <div class="wrapper">
     <div class="types column">
-      <RouterLink v-for="type in types" :key="type.label" to="/content" class="card"
-        @click="updateType(type.label.toLowerCase())">
+      <RouterLink v-for="(type, key) in types" :key="key" to="/content" class="card"
+        @click="updateType(key.toLowerCase())">
         <div class="icon">
           <FontAwesomeIcon :icon="type.icon" />
         </div>
