@@ -23,6 +23,9 @@ const router = createRouter({
       path: '/',
       name: 'Home',
       component: () => import('../views/HomeView.vue'),
+      meta: {
+        fullPage: true,
+      },
     },
     {
       path: '/content',
@@ -59,6 +62,9 @@ const router = createRouter({
       path: '/legal',
       name: 'Legal',
       component: () => import('../views/LegalView.vue'),
+      meta: {
+        fullPage: true,
+      },
     },
   ],
 })
