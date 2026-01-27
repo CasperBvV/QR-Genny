@@ -43,7 +43,7 @@ watch(qrOptions.value, (newOptions) => {
   }
 });
 
-// Listen for download events sibling component
+// Expose download method to the parent component via template ref
 defineExpose({
   downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
     if (qrInstance) {
