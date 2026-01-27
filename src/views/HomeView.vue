@@ -59,7 +59,9 @@ const types = {
       </RouterLink>
     </div>
 
-    <div class="column">Image</div>
+    <div class="column">
+      <img src="@/assets/img/genny-wave.svg" alt="Genny Wave" />
+    </div>
   </div>
 </template>
 
