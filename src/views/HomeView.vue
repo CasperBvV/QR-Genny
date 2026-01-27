@@ -59,7 +59,13 @@ const types = {
       </RouterLink>
     </div>
 
-    <div class="column">Image</div>
+    <div class="column">
+      <div class="textBox">
+        <h1>Hi! I'm Genny!</h1>
+        <p>What QR Code are we going to make today?</p>
+      </div>
+      <img class="genny" src="@/assets/img/genny-wave.svg" alt="Genny, the QR code generator mascot, waving" />
+    </div>
   </div>
 </template>
 
@@ -90,6 +96,51 @@ const types = {
     justify-content: center;
     align-items: center;
     font-weight: bold;
+
+    .textBox {
+      margin-bottom: 20px;
+
+      background-color: $card-background;
+      background: $card-background-gradient;
+      padding: 20px 30px;
+      border: $card-border;
+      border-radius: 8px;
+
+      position: relative;
+      &::before {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+
+        border: 30px solid transparent;
+        border-bottom-color: $bg4;
+        box-sizing: border-box;
+
+        width: 15px;
+        height: 30px;
+        bottom: 0;
+        right: 25%;
+
+        transform: translatey(20px) rotate(-45deg);
+
+      }
+
+      h1 {
+        margin: 0;
+        font-size: 2.5rem;
+        color: $color1;
+      }
+
+      p {
+        margin: 0;
+        font-size: 1.2rem;
+      }
+    }
+    .genny {
+      width: 100%;
+      height: auto;
+    }
   }
 
   .types {

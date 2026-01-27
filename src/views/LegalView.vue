@@ -72,71 +72,97 @@ const trademarks = [
 </script>
 
 <template>
-  <div class="legal-view">
-      <h2>License</h2>
-    <section>
-      <p>
-        QR-Genny is published under the GNU AGPLv3 License.
-      </p>
-    </section>
+  <div class="legal-wrapper">
+    <div class="legal-view">
+        <h2>License</h2>
+      <section>
+        <p>
+          QR-Genny is published under the GNU AGPLv3 License.
+        </p>
+      </section>
 
-    <h2>Direct Dependencies</h2>
-    <p>The following open source libraries are used directly in this project:</p>
-    <section v-for="dep in dependencies" :key="dep.name">
-      <h3>{{ dep.name }}</h3>
-      <div v-if="dep.url">
-        <span>Website: </span>
-        <a :href="dep.url" target="_blank" rel="noopener noreferrer">{{ dep.url }}</a>
-      </div>
-      <div v-if="dep.git">
-        <span>Source Code: </span>
-        <a :href="dep.git" target="_blank" rel="noopener noreferrer">{{ dep.git }}</a>
-      </div>
-      <div v-if="dep.licenseUrl">
-        <span>License: </span>
-        <a :href="dep.licenseUrl" target="_blank" rel="noopener noreferrer">{{ dep.license }}</a>
-      </div>
-      <div v-else-if="dep.license">
-        <span>License: </span>
-        <span>{{ dep.license }}</span>
-      </div>
-    </section>
+      <h2>Direct Dependencies</h2>
+      <p>The following open source libraries are used directly in this project:</p>
+      <section v-for="dep in dependencies" :key="dep.name">
+        <h3>{{ dep.name }}</h3>
+        <div v-if="dep.url">
+          <span>Website: </span>
+          <a :href="dep.url" target="_blank" rel="noopener noreferrer">{{ dep.url }}</a>
+        </div>
+        <div v-if="dep.git">
+          <span>Source Code: </span>
+          <a :href="dep.git" target="_blank" rel="noopener noreferrer">{{ dep.git }}</a>
+        </div>
+        <div v-if="dep.licenseUrl">
+          <span>License: </span>
+          <a :href="dep.licenseUrl" target="_blank" rel="noopener noreferrer">{{ dep.license }}</a>
+        </div>
+        <div v-else-if="dep.license">
+          <span>License: </span>
+          <span>{{ dep.license }}</span>
+        </div>
+      </section>
 
-    <h2>Trademarks</h2>
-    <p>The following trademarks are acknowledged in this project:</p>
-    <section v-for="tm in trademarks" :key="tm.name">
-      <h3>{{ tm.name }}</h3>
-      <div v-if="tm.owner">
-        <span>Owner: </span>
-        <span>{{ tm.owner }}</span>
-      </div>
-      <div v-if="tm.url">
-        <span>More Info: </span>
-        <a :href="tm.url" target="_blank" rel="noopener noreferrer">{{ tm.url }}</a>
-      </div>
-    </section>
+      <h2>Trademarks</h2>
+      <p>The following trademarks are acknowledged in this project:</p>
+      <section v-for="tm in trademarks" :key="tm.name">
+        <h3>{{ tm.name }}</h3>
+        <div v-if="tm.owner">
+          <span>Owner: </span>
+          <span>{{ tm.owner }}</span>
+        </div>
+        <div v-if="tm.url">
+          <span>More Info: </span>
+          <a :href="tm.url" target="_blank" rel="noopener noreferrer">{{ tm.url }}</a>
+        </div>
+      </section>
 
+    </div>
   </div>
+
 </template>
 
 
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
 
-.legal-view {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
 
-  justify-content: center;
-  align-items: center;
-  padding: 40px;
-
+.legal-wrapper {
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
+  height: 100%;
 
-  box-sizing: border-box;
+  overflow-y: auto;
+
+  // Scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: $color1 transparent;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: $color1;
+    border-radius: 2px;
+  }
+
+  .legal-view {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+
+    width: 100%;
+
+    height: fit-content;
+    box-sizing: border-box;
+  }
 }
 
 section {
