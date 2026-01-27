@@ -22,42 +22,42 @@ const dependencies = [
     url: '',
     git: 'https://github.com/vuejs/create-vue',
     license: 'MIT License',
-    lincenseurl: '/licenses/createVueMIT.txt',
+    licenseUrl: '/licenses/createVueMIT.txt',
   },
   {
     name: 'Vue 3',
     url: 'https://vuejs.org/',
     git: 'https://github.com/vuejs/vue',
     license: 'MIT License',
-    lincenseurl: '/licenses/vueMIT.txt',
+    licenseUrl: '/licenses/vueMIT.txt',
   },
   {
     name: 'Vite',
     url: 'https://vite.dev/',
     git: 'https://github.com/vitejs/vite',
     license: 'MIT License',
-    lincenseurl: '/licenses/viteMIT.txt',
+    licenseUrl: '/licenses/viteMIT.txt',
   },
   {
     name: 'Vue Router',
     url: 'https://router.vuejs.org/',
     git: 'https://github.com/vuejs/router',
     license: 'MIT License',
-    lincenseurl: '/licenses/routerMIT.txt',
+    licenseUrl: '/licenses/routerMIT.txt',
   },
   {
     name: 'QRCodeStyling',
     url: 'https://github.com/kozakdenys/qr-code-styling',
     git: 'https://github.com/kozakdenys/qr-code-styling',
     license: 'MIT License',
-    lincenseurl: '/licenses/qrCodeStylingMIT.txt',
+    licenseUrl: '/licenses/qrCodeStylingMIT.txt',
   },
   {
     name: 'SASS Embedded',
     url: 'https://sass-lang.com/documentation/js-api/',
     git: 'https://github.com/sass/embedded-host-node',
     license: 'MIT License',
-    lincenseurl: '/licenses/sassEmbeddedMIT.txt',
+    licenseUrl: '/licenses/sassEmbeddedMIT.txt',
   }
 ];
 
@@ -92,9 +92,9 @@ const trademarks = [
         <span>Source Code: </span>
         <a :href="dep.git" target="_blank" rel="noopener noreferrer">{{ dep.git }}</a>
       </div>
-      <div v-if="dep.lincenseurl">
+      <div v-if="dep.licenseUrl">
         <span>License: </span>
-        <a :href="dep.lincenseurl" target="_blank" rel="noopener noreferrer">{{ dep.license }}</a>
+        <a :href="dep.licenseUrl" target="_blank" rel="noopener noreferrer">{{ dep.license }}</a>
       </div>
       <div v-else-if="dep.license">
         <span>License: </span>
