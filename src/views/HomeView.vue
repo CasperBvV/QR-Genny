@@ -62,7 +62,7 @@ const types = {
     <div class="column">
       <div class="textBox">
         <h1>Hi! I'm Genny!</h1>
-        <p>What are we going to create today?</p>
+        <p>What QR Code are we going to make today?</p>
       </div>
       <img src="@/assets/img/genny-wave.svg" alt="Genny Wave" />
     </div>
