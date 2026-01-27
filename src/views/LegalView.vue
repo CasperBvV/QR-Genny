@@ -135,6 +135,8 @@ const trademarks = [
   overflow-y: auto;
 
   // Scrollbar styling
+  scrollbar-width: thin;
+  scrollbar-color: $color1 transparent;
   &::-webkit-scrollbar {
     width: 6px;
   }
