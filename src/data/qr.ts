@@ -204,7 +204,7 @@ function generateVCard(content: Record<string, string>): string {
     dataString += `TEL;TYPE=CELL:${escapeVCardText(content.phone)}\n`;
   }
   if (content.email) {
-    dataString += `EMAIL;HOME;INTERNET:${escapeVCardText(content.email)}\n`;
+    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeVCardText(content.email)}\n`;
   }
   if (content.website) {
     dataString += `URL:${escapeVCardText(content.website)}\n`;
@@ -218,7 +218,7 @@ function generateVCard(content: Record<string, string>): string {
     dataString += `TITLE:${escapeVCardText(content.title)}\n`;
   }
   if (content.workEmail) {
-    dataString += `EMAIL;WORK;INTERNET:${escapeVCardText(content.workEmail)}\n`;
+    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeVCardText(content.workEmail)}\n`;
   }
   if (content.workPhone) {
     dataString += `TEL;TYPE=WORK,VOICE:${escapeVCardText(content.workPhone)}\n`;
