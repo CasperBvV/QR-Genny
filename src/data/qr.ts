@@ -219,7 +219,6 @@ function generateVCard(content: Record<string, string>): string {
   }
 
   dataString += 'END:VCARD';
-  console.log('Generated vCard data string:', dataString);
   return dataString.trim();
 }
 
