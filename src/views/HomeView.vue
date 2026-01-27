@@ -64,7 +64,7 @@ const types = {
         <h1>Hi! I'm Genny!</h1>
         <p>What QR Code are we going to make today?</p>
       </div>
-      <img src="@/assets/img/genny-wave.svg" alt="Genny Wave" />
+      <img src="@/assets/img/genny-wave.svg" alt="Genny, the QR code generator mascot, waving" />
     </div>
   </div>
 </template>
