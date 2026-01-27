@@ -177,7 +177,13 @@ function parseContent(content: Record<string, string>, type: string) {
 }
 
 function escapeVCardText(text: string | undefined): string {
-  return text ? text.replace(/,/g, '\\,').replace(/;/g, '\\;').replace(/\n/g, '\\n') : '';
+  return text
+    ? text
+        .replace(/\\/g, '\\\\')
+        .replace(/,/g, '\\,')
+        .replace(/;/g, '\\;')
+        .replace(/\n/g, '\\n')
+    : '';
 }
 function generateVCard(content: Record<string, string>): string {
   let dataString = '';
