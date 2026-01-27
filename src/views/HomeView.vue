@@ -98,7 +98,6 @@ const types = {
     font-weight: bold;
 
     .textBox {
-      // text-align: center;
       margin-bottom: 20px;
 
       background-color: $card-background;
