@@ -86,6 +86,11 @@ watch(userInput, (newValue) => {
     border: 1px solid $bg5;
     box-shadow: 0 0 5px rgba($bg4, 0.75);
 
+    // Placeholder styling
+    &::placeholder {
+      color: rgba($textcolor, 0.5);
+    }
+
     &:focus {
       outline: none;
       border-color: $color1;

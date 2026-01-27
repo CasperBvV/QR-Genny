@@ -26,6 +26,7 @@ interface Field {
   inputType: string
   label: string
   value: string
+  placeholder?: string
 }
 
 const fields: Record<string, Field[]> = {
@@ -34,6 +35,7 @@ const fields: Record<string, Field[]> = {
       inputType: 'text',
       label: 'URL',
       value: 'url',
+      placeholder: 'https://example.com',
     },
   ],
   text: [
@@ -41,6 +43,7 @@ const fields: Record<string, Field[]> = {
       inputType: 'textarea',
       label: 'Enter text',
       value: 'text',
+      placeholder: 'Your text here...',
     },
   ],
   vcard: [
@@ -68,7 +71,7 @@ const fields: Record<string, Field[]> = {
       </template>
       <template v-for="field in fields[qrData.home?.type]" :key="field.value">
         <ContentInputComponent :inputType="field.inputType" :label="field.label" :value="field.value"
-          :prefilled="currentData[field.value]" />
+          :prefilled="currentData[field.value]" :placeholder="field.placeholder" />
       </template>
     </template>
     <template #buttons>
