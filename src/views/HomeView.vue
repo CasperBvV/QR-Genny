@@ -71,7 +71,6 @@ const types = {
   flex-direction: row;
   align-items: center;
 
-  height: 100%;
   width: 100%;
   max-width: 1200px;
   margin: 15px auto;
@@ -102,8 +101,12 @@ const types = {
 
     gap: 15px;
 
-    padding: 5px;
+    padding: 50px;
+    overflow-x: hidden;
     overflow-y: auto;
+
+    height: fit-content;
+    max-height: 100%;
 
     .card {
       background-color: $card-background;

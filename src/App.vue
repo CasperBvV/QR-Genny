@@ -33,7 +33,7 @@ watch(route, (newRoute) => {
 
 <template>
   <div id="wrapper">
-    <RouterView v-if="fullPage === true" />
+    <RouterView class="fullcontent" v-if="fullPage === true" />
 
     <div class="content" v-else-if="fullPage === false">
       <NavBar class="nav" />
@@ -55,13 +55,15 @@ watch(route, (newRoute) => {
 
 #wrapper {
   height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
 
-  .footer {
-    margin-top: auto;
-  }
+.fullcontent {
+  flex-grow: 1;
+  height: 50%;
 }
 
 .content {
