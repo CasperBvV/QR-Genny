@@ -59,27 +59,3 @@ defineExpose({
 
   <div class="qr-code" ref="qrCode"></div>
 </template>
-
-<style scoped lang="scss">
-@use '@/assets/variables' as *;
-
-.qr-code {
-  width: fit-content;
-  max-width: 100%;
-
-  // aspect-ratio: 1 / 1;
-
-  background-color: $card-background;
-  border: $card-border;
-  border-radius: 0.25rem;
-  // overflow: hidden;
-  box-sizing: border-box;
-
-  canvas,
-  svg {
-    height: 250px;
-    overflow: hidden;
-    display: block;
-  }
-}
-</style>
