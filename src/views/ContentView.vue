@@ -157,7 +157,7 @@ const fields: Record<string, Field[]> = {
         <RouterLink to="/">Go to Home</RouterLink>
       </template>
       <div :class="qrData.home?.type">
-        <template v-for="field in fields[qrData.home?.type]" :key="field.value">
+        <template v-for="(field, index) in fields[qrData.home?.type]" :key="field.inputType + '-' + index">
           <div v-if="field.inputType === 'spacer'" class="spacer">
             <hr v-if="field.value !== 'hideLine'" />
             <h2 v-if="field.label !== ''">{{ field.label }}</h2>
