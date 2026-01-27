@@ -59,7 +59,7 @@ const router = createRouter({
       path: '/legal',
       name: 'Legal',
       component: () => import('../views/LegalView.vue'),
-    }
+    },
   ],
 })
 
