@@ -74,7 +74,7 @@ const types = {
 
 .wrapper {
   display: flex;
-  flex-direction: row;
+  flex-direction: column-reverse;
   align-items: center;
 
   width: 100%;
@@ -85,9 +85,17 @@ const types = {
 
   gap: 10px;
 
+  @media not screen and (max-width: 768px) {
+    flex-direction: row;
+
+    .column {
+      min-width: 300px;
+    }
+  }
+
   .column {
     height: 100%;
-    min-width: 300px;
+    max-width: 100%;
     flex: 1;
 
     box-sizing: border-box;
@@ -107,6 +115,7 @@ const types = {
       border-radius: 8px;
 
       position: relative;
+
       &::before {
         content: '';
         display: block;
@@ -137,6 +146,7 @@ const types = {
         font-size: 1.2rem;
       }
     }
+
     .genny {
       width: 100%;
       height: auto;
@@ -146,13 +156,16 @@ const types = {
   .types {
     flex: 2;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
 
     align-content: start;
 
     gap: 15px;
 
-    padding: 50px;
+    @media not screen and (max-width: 768px) {
+      padding: 50px;
+    }
+
     overflow-x: hidden;
     overflow-y: auto;
 
