@@ -76,7 +76,7 @@ footer {
       display: flex;
 
       &:not(:last-child) {
-        padding-right: -$flex-gap+$gap;
+        padding-right: $gap - $flex-gap;
       }
 
       &::before {
