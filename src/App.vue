@@ -108,14 +108,15 @@ function downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
 
       box-sizing: border-box;
     }
+
+    .nav,
+    .main,
+    .result {
+      border-radius: 8px;
+      border: 1px solid $bg4;
+    }
   }
 
-  .nav,
-  .main,
-  .result {
-    border-radius: 8px;
-    border: 1px solid $bg4;
-  }
 
   .nav {
     grid-column: 1 / 3;
@@ -124,6 +125,8 @@ function downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
   .main {
     grid-column: 1 / 2;
     overflow: hidden;
+
+    border-bottom: 1px solid $bg4;
   }
 
   .result {
@@ -134,6 +137,8 @@ function downloadQR(format: 'svg' | 'png' | 'jpeg' | 'webp') {
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    border-top: 1px solid $bg4;
 
     @extend .scrollbar;
     overflow: auto;
