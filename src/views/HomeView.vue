@@ -94,7 +94,6 @@ const types = {
   }
 
   .column {
-    height: 100%;
     max-width: 100%;
     flex: 1;
 
