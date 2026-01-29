@@ -199,7 +199,7 @@ const fields: Record<string, Field[]> = {
         Please select a content type.
         <RouterLink to="/">Go to Home</RouterLink>
       </template>
-      <div :class="qrData.home?.type">
+      <div :class="qrData.home?.type" class="inputFields">
         <template v-for="(field, index) in fields[qrData.home?.type]" :key="field.inputType + '-' + index">
           <div v-if="field.inputType === 'spacer'" class="spacer">
             <hr v-if="!field.hideLine" />
@@ -225,28 +225,33 @@ const fields: Record<string, Field[]> = {
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
 
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spacer {
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+
+  hr {
+    border: none;
+    width: 100%;
+    border-top: 1px solid $color2;
+  }
+
+  h2 {
+    margin: 0;
+    color: $color1;
+    font-weight: bold;
+  }
+}
+
 .vcard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-
-
-  .spacer {
-    grid-column: 1 / 3;
-    display: flex;
-    flex-direction: column;
-
-    hr {
-      border: none;
-      width: 100%;
-      border-top: 1px solid $color2;
-    }
-
-    h2 {
-      margin: 0;
-      color: $color1;
-      font-weight: bold;
-    }
-  }
 }
 </style>
