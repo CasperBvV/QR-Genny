@@ -168,6 +168,9 @@ function parseContent(content: Record<string, string>, type: string) {
     case 'vcard':
       dataString = generateVCard(content);
       break;
+    case 'wifi':
+      dataString = generateWifi(content);
+      break;
     default:
       dataString = content[type] || 'https://cbuurman.nl';
   }
@@ -175,7 +178,7 @@ function parseContent(content: Record<string, string>, type: string) {
   qrOptions.value.data = dataString;
 }
 
-function escapeVCardText(text: string | undefined): string {
+function escapeText(text: string | undefined): string {
   return text
     ? text
         .replace(/\\/g, '\\\\')
@@ -190,41 +193,53 @@ function generateVCard(content: Record<string, string>): string {
 
 
   // Name
-  dataString += `N:${escapeVCardText(content.lname)};${escapeVCardText(content.fname)};${escapeVCardText(content.mname)};${escapeVCardText(content.prefix)};${escapeVCardText(content.suffix)}\n`;
-  const fullName = [escapeVCardText(content.prefix), escapeVCardText(content.fname), escapeVCardText(content.mname), escapeVCardText(content.lname), escapeVCardText(content.suffix)].filter(Boolean).join(' ');
+  dataString += `N:${escapeText(content.lname)};${escapeText(content.fname)};${escapeText(content.mname)};${escapeText(content.prefix)};${escapeText(content.suffix)}\n`;
+  const fullName = [escapeText(content.prefix), escapeText(content.fname), escapeText(content.mname), escapeText(content.lname), escapeText(content.suffix)].filter(Boolean).join(' ');
   dataString += `FN:${fullName}\n`;
 
   if (content.nickname) {
-    dataString += `NICKNAME:${escapeVCardText(content.nickname)}\n`;
+    dataString += `NICKNAME:${escapeText(content.nickname)}\n`;
   }
 
   // Contact details
   if (content.phone) {
-    dataString += `TEL;TYPE=CELL:${escapeVCardText(content.phone)}\n`;
+    dataString += `TEL;TYPE=CELL:${escapeText(content.phone)}\n`;
   }
   if (content.email) {
-    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeVCardText(content.email)}\n`;
+    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeText(content.email)}\n`;
   }
   if (content.website) {
-    dataString += `URL:${escapeVCardText(content.website)}\n`;
+    dataString += `URL:${escapeText(content.website)}\n`;
   }
 
   // Work details
   if (content.org || content.department || content.subDepartment) {
-    dataString += `ORG:${escapeVCardText(content.org)};${escapeVCardText(content.department)};${escapeVCardText(content.subDepartment)}\n`;
+    dataString += `ORG:${escapeText(content.org)};${escapeText(content.department)};${escapeText(content.subDepartment)}\n`;
   }
   if (content.title) {
-    dataString += `TITLE:${escapeVCardText(content.title)}\n`;
+    dataString += `TITLE:${escapeText(content.title)}\n`;
   }
   if (content.workEmail) {
-    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeVCardText(content.workEmail)}\n`;
+    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeText(content.workEmail)}\n`;
   }
   if (content.workPhone) {
-    dataString += `TEL;TYPE=WORK,VOICE:${escapeVCardText(content.workPhone)}\n`;
+    dataString += `TEL;TYPE=WORK,VOICE:${escapeText(content.workPhone)}\n`;
   }
 
   dataString += 'END:VCARD';
   return dataString.trim();
+}
+
+function generateWifi(content: Record<string, string>): string {
+  let dataString = 'WIFI:';
+  dataString += `S:${escapeText(content.ssid)};`;
+  dataString += `T:${escapeText(content.encryption)};`;
+  dataString += `P:${escapeText(content.password)};`;
+  if (content.hidden === 'true' || content.hidden === 'on') {
+    dataString += 'H:true;';
+  }
+  dataString += ';';
+  return dataString;
 }
 
 function parseDotColorOptions(colorData: colorType) {
