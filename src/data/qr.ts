@@ -178,7 +178,7 @@ function parseContent(content: Record<string, string>, type: string) {
   qrOptions.value.data = dataString;
 }
 
-function escapeText(text: string | undefined): string {
+function escapeVCardText(text: string | undefined): string {
   return text
     ? text
         .replace(/\\/g, '\\\\')
@@ -193,50 +193,62 @@ function generateVCard(content: Record<string, string>): string {
 
 
   // Name
-  dataString += `N:${escapeText(content.lname)};${escapeText(content.fname)};${escapeText(content.mname)};${escapeText(content.prefix)};${escapeText(content.suffix)}\n`;
-  const fullName = [escapeText(content.prefix), escapeText(content.fname), escapeText(content.mname), escapeText(content.lname), escapeText(content.suffix)].filter(Boolean).join(' ');
+  dataString += `N:${escapeVCardText(content.lname)};${escapeVCardText(content.fname)};${escapeVCardText(content.mname)};${escapeVCardText(content.prefix)};${escapeVCardText(content.suffix)}\n`;
+  const fullName = [escapeVCardText(content.prefix), escapeVCardText(content.fname), escapeVCardText(content.mname), escapeVCardText(content.lname), escapeVCardText(content.suffix)].filter(Boolean).join(' ');
   dataString += `FN:${fullName}\n`;
 
   if (content.nickname) {
-    dataString += `NICKNAME:${escapeText(content.nickname)}\n`;
+    dataString += `NICKNAME:${escapeVCardText(content.nickname)}\n`;
   }
 
   // Contact details
   if (content.phone) {
-    dataString += `TEL;TYPE=CELL:${escapeText(content.phone)}\n`;
+    dataString += `TEL;TYPE=CELL:${escapeVCardText(content.phone)}\n`;
   }
   if (content.email) {
-    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeText(content.email)}\n`;
+    dataString += `EMAIL;TYPE=HOME;TYPE=INTERNET:${escapeVCardText(content.email)}\n`;
   }
   if (content.website) {
-    dataString += `URL:${escapeText(content.website)}\n`;
+    dataString += `URL:${escapeVCardText(content.website)}\n`;
   }
 
   // Work details
   if (content.org || content.department || content.subDepartment) {
-    dataString += `ORG:${escapeText(content.org)};${escapeText(content.department)};${escapeText(content.subDepartment)}\n`;
+    dataString += `ORG:${escapeVCardText(content.org)};${escapeVCardText(content.department)};${escapeVCardText(content.subDepartment)}\n`;
   }
   if (content.title) {
-    dataString += `TITLE:${escapeText(content.title)}\n`;
+    dataString += `TITLE:${escapeVCardText(content.title)}\n`;
   }
   if (content.workEmail) {
-    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeText(content.workEmail)}\n`;
+    dataString += `EMAIL;TYPE=WORK;TYPE=INTERNET:${escapeVCardText(content.workEmail)}\n`;
   }
   if (content.workPhone) {
-    dataString += `TEL;TYPE=WORK,VOICE:${escapeText(content.workPhone)}\n`;
+    dataString += `TEL;TYPE=WORK,VOICE:${escapeVCardText(content.workPhone)}\n`;
   }
 
   dataString += 'END:VCARD';
   return dataString.trim();
 }
 
+function escapeWifiText(text: string | undefined): string {
+  return text
+    ? text
+        .replace(/\\/g, '\\\\')
+        .replace(/,/g, '\\,')
+        .replace(/;/g, '\\;')
+        .replace(/:/g, '\\:')
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+    : '';
+}
+
 function generateWifi(content: Record<string, string>): string {
   let dataString = 'WIFI:';
-  dataString += `S:${escapeText(content.ssid)};`;
-  dataString += `T:${escapeText(content.encryption)};`;
+  dataString += `S:${escapeWifiText(content.ssid)};`;
+  dataString += `T:${escapeWifiText(content.encryption)};`;
   // According to Wi-Fi QR specification, when encryption is 'nopass' the password field must be empty.
   if (content.encryption !== 'nopass') {
-    dataString += `P:${escapeText(content.password)};`;
+    dataString += `P:${escapeWifiText(content.password)};`;
   }
   if (content.hidden === 'true' || content.hidden === 'on') {
     dataString += 'H:true;';
