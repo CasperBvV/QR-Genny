@@ -158,12 +158,6 @@ const fields: Record<string, Field[]> = {
       placeholder: 'MyWiFiNetwork',
     },
     {
-      inputType: 'text',
-      label: 'Password',
-      value: 'password',
-      placeholder: 'YourWiFiPassword',
-    },
-    {
       inputType: 'select',
       label: 'Encryption Type',
       value: 'encryption',
@@ -182,6 +176,12 @@ const fields: Record<string, Field[]> = {
         },
       ] as OptionType[],
       default: 'WPA',
+    },
+    {
+      inputType: 'text',
+      label: 'Password',
+      value: 'password',
+      placeholder: 'YourWiFiPassword',
     },
     {
       inputType: 'checkbox',
