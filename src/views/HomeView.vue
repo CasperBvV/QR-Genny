@@ -44,7 +44,7 @@ const types = {
   },
   wifi: {
     icon: faWifi,
-    label: 'WiFi',
+    label: 'Wi-Fi',
   },
 }
 
