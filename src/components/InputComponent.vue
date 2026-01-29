@@ -39,12 +39,14 @@ const emit = defineEmits<{
   (e: 'update', value: string, field?: string): void
 }>()
 
-const userInput = ref<string>(props.prefilled || props.default || '')
+const userInput = ref<string>('')
 
 // check if userInput changes and emit update event
 watch(userInput, (newValue) => {
   emit('update', newValue, props.value)
 })
+
+userInput.value = props.prefilled || props.default || ''
 </script>
 
 <template>
