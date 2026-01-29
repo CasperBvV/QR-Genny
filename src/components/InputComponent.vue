@@ -116,5 +116,9 @@ userInput.value = props.prefilled || props.default || ''
     resize: vertical;
     min-height: 80px;
   }
+
+  input[type='checkbox'] {
+    width: fit-content;
+  }
 }
 </style>
