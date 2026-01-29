@@ -234,7 +234,10 @@ function generateWifi(content: Record<string, string>): string {
   let dataString = 'WIFI:';
   dataString += `S:${escapeText(content.ssid)};`;
   dataString += `T:${escapeText(content.encryption)};`;
-  dataString += `P:${escapeText(content.password)};`;
+  // According to Wi-Fi QR specification, when encryption is 'nopass' the password field must be empty.
+  if (content.encryption !== 'nopass') {
+    dataString += `P:${escapeText(content.password)};`;
+  }
   if (content.hidden === 'true' || content.hidden === 'on') {
     dataString += 'H:true;';
   }
