@@ -18,9 +18,14 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 
+export interface OptionType {
+  label: string
+  value: string
+}
+
 const props = defineProps<{
   inputType: string
-  options?: string[]
+  options?: OptionType[]
   default?: string
   label?: string
   placeholder?: string
@@ -34,25 +39,28 @@ const emit = defineEmits<{
   (e: 'update', value: string, field?: string): void
 }>()
 
-const userInput = ref<string>(props.prefilled || props.default || '')
+const userInput = ref<string>('')
 
 // check if userInput changes and emit update event
 watch(userInput, (newValue) => {
   emit('update', newValue, props.value)
 })
+
+userInput.value = props.prefilled || props.default || ''
 </script>
 
 <template>
   <div class="radio" v-if="inputType == 'radio'">
-    <label v-for="option in options" :key="option">
-      <input type="radio" :name="unique + value" :value="option" v-model="userInput" :checked="userInput === option" />
-      {{ option }}
+    <label v-for="option in options" :key="option.value">
+      <input type="radio" :name="unique + value" :value="option.value" v-model="userInput"
+        :checked="userInput === option.value" />
+      {{ option.label }}
     </label>
   </div>
   <div class="input-component" v-else>
     <label :for="value" v-if="label">{{ label }}:</label>
     <select :name="value" :id="value" v-model="userInput" v-if="inputType === 'select' && options">
-      <option v-for="option in options" :key="option" :value="option">{{ option }}</option>
+      <option v-for="option in options" :key="option.value" :value="option.value">{{ option.label }}</option>
     </select>
 
     <textarea :id="value" v-model="userInput" :placeholder="props.placeholder"
@@ -107,6 +115,10 @@ watch(userInput, (newValue) => {
   textarea {
     resize: vertical;
     min-height: 80px;
+  }
+
+  input[type='checkbox'] {
+    width: fit-content;
   }
 }
 </style>

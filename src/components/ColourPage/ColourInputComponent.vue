@@ -17,8 +17,23 @@
 
 <script setup lang="ts">
 import { qrData, type colorType } from '@/data/qr'
-import InputComponent from '@/components/InputComponent.vue';
+import InputComponent, { type OptionType } from '@/components/InputComponent.vue';
 import { ref } from 'vue';
+
+const colortypes: OptionType[] = [
+  {
+    label: 'Default',
+    value: 'default',
+  },
+  {
+    label: 'Solid',
+    value: 'solid',
+  },
+  {
+    label: 'Gradient',
+    value: 'gradient',
+  },
+]
 
 const props = defineProps<{
   value: 'dotsOptions' | 'backgroundOptions' | 'cornersSquareOptions' | 'cornersDotOptions'
@@ -61,8 +76,8 @@ if (props.value == 'backgroundOptions' && !currentData?.type) {
 </script>
 
 <template>
-  <InputComponent inputType="radio" :unique="value" value="type" :options="['default', 'solid', 'gradient']"
-    default="default" :prefilled="currentData?.type" @update="updateValue" />
+  <InputComponent inputType="radio" :unique="value" value="type" :options="colortypes" default="default"
+    :prefilled="currentData?.type" @update="updateValue" />
 
   <div class="row">
     <InputComponent v-if="isGradient || isSolid" inputType="color" value="color1" :prefilled="currentData?.color1"

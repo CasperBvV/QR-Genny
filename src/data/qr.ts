@@ -168,6 +168,9 @@ function parseContent(content: Record<string, string>, type: string) {
     case 'vcard':
       dataString = generateVCard(content);
       break;
+    case 'wifi':
+      dataString = generateWifi(content);
+      break;
     default:
       dataString = content[type] || 'https://cbuurman.nl';
   }
@@ -225,6 +228,33 @@ function generateVCard(content: Record<string, string>): string {
 
   dataString += 'END:VCARD';
   return dataString.trim();
+}
+
+function escapeWifiText(text: string | undefined): string {
+  return text
+    ? text
+        .replace(/\\/g, '\\\\')
+        .replace(/,/g, '\\,')
+        .replace(/;/g, '\\;')
+        .replace(/:/g, '\\:')
+        .replace(/"/g, '\\"')
+        .replace(/\n/g, '\\n')
+    : '';
+}
+
+function generateWifi(content: Record<string, string>): string {
+  let dataString = 'WIFI:';
+  dataString += `S:${escapeWifiText(content.ssid)};`;
+  dataString += `T:${escapeWifiText(content.encryption)};`;
+  // According to Wi-Fi QR specification, when encryption is 'nopass' the password field must be empty.
+  if (content.encryption !== 'nopass') {
+    dataString += `P:${escapeWifiText(content.password)};`;
+  }
+  if (content.hidden === 'true' || content.hidden === 'on') {
+    dataString += 'H:true;';
+  }
+  dataString += ';';
+  return dataString;
 }
 
 function parseDotColorOptions(colorData: colorType) {

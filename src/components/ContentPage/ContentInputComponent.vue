@@ -17,11 +17,11 @@
 
 <script setup lang="ts">
 import { qrData } from '@/data/qr'
-import InputComponent from '@/components/InputComponent.vue';
+import InputComponent, { type OptionType } from '@/components/InputComponent.vue';
 
 const props = defineProps<{
   inputType: string
-  options?: string[]
+  options?: OptionType[]
   label?: string
   placeholder?: string
 

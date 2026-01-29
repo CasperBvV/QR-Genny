@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import ArrowButton from '@/components/ArrowButton.vue'
 import ContentInputComponent from '@/components/ContentPage/ContentInputComponent.vue'
+import type { OptionType } from '@/components/InputComponent.vue'
 import SettingsLayout from '@/components/SettingsLayout.vue'
 import { qrData } from '@/data/qr'
 const currentData = qrData.value.content || {}
@@ -26,6 +27,8 @@ interface Field {
   inputType: string
   label: string
   value: string
+  options?: OptionType[]
+  default?: string
   placeholder?: string
   hideLine?: boolean
 }
@@ -146,6 +149,46 @@ const fields: Record<string, Field[]> = {
       placeholder: '+1 234 567 8902',
     }
   ],
+  wifi: [
+    { inputType: 'spacer', label: 'Wi-Fi Settings', value: '', hideLine: true },
+    {
+      inputType: 'text',
+      label: 'SSID (Network Name)',
+      value: 'ssid',
+      placeholder: 'MyWiFiNetwork',
+    },
+    {
+      inputType: 'select',
+      label: 'Encryption Type',
+      value: 'encryption',
+      options: [
+        {
+          value: 'WPA',
+          label: 'WPA/WPA2',
+        },
+        {
+          value: 'WEP',
+          label: 'WEP',
+        },
+        {
+          value: 'nopass',
+          label: 'No Password',
+        },
+      ] as OptionType[],
+      default: 'WPA',
+    },
+    {
+      inputType: 'text',
+      label: 'Password',
+      value: 'password',
+      placeholder: 'YourWiFiPassword',
+    },
+    {
+      inputType: 'checkbox',
+      label: 'Hidden Network',
+      value: 'hidden',
+    },
+  ],
 }
 
 </script>
@@ -157,14 +200,15 @@ const fields: Record<string, Field[]> = {
         Please select a content type.
         <RouterLink to="/">Go to Home</RouterLink>
       </template>
-      <div :class="qrData.home?.type">
+      <div :class="qrData.home?.type" class="inputFields">
         <template v-for="(field, index) in fields[qrData.home?.type]" :key="field.inputType + '-' + index">
           <div v-if="field.inputType === 'spacer'" class="spacer">
             <hr v-if="!field.hideLine" />
             <h2 v-if="field.label !== ''">{{ field.label }}</h2>
           </div>
           <ContentInputComponent v-else :class="field.value" :inputType="field.inputType" :label="field.label"
-            :value="field.value" :prefilled="currentData[field.value]" :placeholder="field.placeholder" />
+            :value="field.value" :prefilled="currentData[field.value]" :placeholder="field.placeholder"
+            :options="field.options" :default="field.default" />
         </template>
       </div>
     </template>
@@ -182,28 +226,33 @@ const fields: Record<string, Field[]> = {
 <style scoped lang="scss">
 @use '@/assets/variables' as *;
 
+.inputFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.spacer {
+  grid-column: 1 / 3;
+  display: flex;
+  flex-direction: column;
+
+  hr {
+    border: none;
+    width: 100%;
+    border-top: 1px solid $color2;
+  }
+
+  h2 {
+    margin: 0;
+    color: $color1;
+    font-weight: bold;
+  }
+}
+
 .vcard {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
-
-
-  .spacer {
-    grid-column: 1 / 3;
-    display: flex;
-    flex-direction: column;
-
-    hr {
-      border: none;
-      width: 100%;
-      border-top: 1px solid $color2;
-    }
-
-    h2 {
-      margin: 0;
-      color: $color1;
-      font-weight: bold;
-    }
-  }
 }
 </style>
