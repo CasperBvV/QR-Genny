@@ -150,6 +150,7 @@ const fields: Record<string, Field[]> = {
     }
   ],
   wifi: [
+    { inputType: 'spacer', label: 'Wi-Fi Settings', value: '', hideLine: true },
     {
       inputType: 'text',
       label: 'SSID (Network Name)',
