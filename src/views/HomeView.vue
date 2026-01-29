@@ -17,7 +17,7 @@
 
 <script setup lang="ts">
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faLink, faClipboard, faIdCard } from '@fortawesome/free-solid-svg-icons'
+import { faLink, faClipboard, faIdCard, faWifi } from '@fortawesome/free-solid-svg-icons'
 
 import { qrData } from '@/data/qr';
 
@@ -41,6 +41,10 @@ const types = {
   vcard: {
     icon: faIdCard,
     label: 'Business Card',
+  },
+  wifi: {
+    icon: faWifi,
+    label: 'WiFi',
   },
 }
 

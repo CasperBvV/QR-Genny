@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import ArrowButton from '@/components/ArrowButton.vue'
 import ContentInputComponent from '@/components/ContentPage/ContentInputComponent.vue'
+import type { OptionType } from '@/components/InputComponent.vue'
 import SettingsLayout from '@/components/SettingsLayout.vue'
 import { qrData } from '@/data/qr'
 const currentData = qrData.value.content || {}
@@ -26,6 +27,8 @@ interface Field {
   inputType: string
   label: string
   value: string
+  options?: OptionType[]
+  default?: string
   placeholder?: string
   hideLine?: boolean
 }
@@ -146,6 +149,45 @@ const fields: Record<string, Field[]> = {
       placeholder: '+1 234 567 8902',
     }
   ],
+  wifi: [
+    {
+      inputType: 'text',
+      label: 'SSID (Network Name)',
+      value: 'ssid',
+      placeholder: 'MyWiFiNetwork',
+    },
+    {
+      inputType: 'text',
+      label: 'Password',
+      value: 'password',
+      placeholder: 'YourWiFiPassword',
+    },
+    {
+      inputType: 'select',
+      label: 'Encryption Type',
+      value: 'encryption',
+      options: [
+        {
+          value: 'WPA',
+          label: 'WPA/WPA2',
+        },
+        {
+          value: 'WEP',
+          label: 'WEP',
+        },
+        {
+          value: 'nopass',
+          label: 'No Password',
+        },
+      ] as OptionType[],
+      default: 'WPA',
+    },
+    {
+      inputType: 'checkbox',
+      label: 'Hidden Network',
+      value: 'hidden',
+    },
+  ],
 }
 
 </script>
@@ -164,7 +206,8 @@ const fields: Record<string, Field[]> = {
             <h2 v-if="field.label !== ''">{{ field.label }}</h2>
           </div>
           <ContentInputComponent v-else :class="field.value" :inputType="field.inputType" :label="field.label"
-            :value="field.value" :prefilled="currentData[field.value]" :placeholder="field.placeholder" />
+            :value="field.value" :prefilled="currentData[field.value]" :placeholder="field.placeholder"
+            :options="field.options" :default="field.default" />
         </template>
       </div>
     </template>
