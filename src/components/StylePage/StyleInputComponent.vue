@@ -38,9 +38,13 @@ function updateValue(newValue: string, field?: string) {
     }
   }
 
-  qrData.value.style[props.field] = newValue as DotType;
-
-
+  if (props.field === 'dotStyle') {
+    qrData.value.style.dotStyle = newValue as DotType;
+  } else if (props.field === 'cornerStyle') {
+    qrData.value.style.cornerStyle = newValue as CornerSquareType;
+  } else if (props.field === 'cornerDotStyle') {
+    qrData.value.style.cornerDotStyle = newValue as CornerDotType;
+  }
 }
 
 const currentData = qrData.value.style ? qrData.value.style[props.field] : '';
