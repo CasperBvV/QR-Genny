@@ -32,9 +32,9 @@ function updateValue(newValue: string, field?: string) {
 
   if (!qrData.value.style) {
     qrData.value.style = {
-      dotStyle: {} as DotType,
-      cornerStyle: {} as CornerSquareType,
-      cornerDotStyle: {} as CornerDotType,
+      dotStyle: 'square' as DotType,
+      cornerStyle: 'square' as CornerSquareType,
+      cornerDotStyle: 'square' as CornerDotType,
     }
   }
 
