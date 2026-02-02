@@ -51,10 +51,3 @@ const currentData = qrData.value.style ? qrData.value.style[props.field] : '';
   <InputComponent inputType="radio" :unique="props.field" value="type" :options="styleTypes" default="square"
     :prefilled="currentData" @update="updateValue" />
 </template>
-
-<style scoped>
-.row {
-  display: flex;
-  gap: 1rem;
-}
-</style>
