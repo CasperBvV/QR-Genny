@@ -148,6 +148,11 @@ function applyUpdates(newData: qrDataType) {
   parseBackgroundColorOptions(newData.colour?.backgroundOptions);
   parseCornerSquareColorOptions(newData.colour?.cornersSquareOptions);
   parseCornerDotColorOptions(newData.colour?.cornersDotOptions);
+
+  parseDotStyleOptions(newData.style?.dotStyle);
+  parseCornerSquareStyleOptions(newData.style?.cornerStyle);
+  parseCornerDotStyleOptions(newData.style?.cornerDotStyle);
+
 }
 
 function parseContent(content: Record<string, string>, type: string) {
@@ -397,4 +402,20 @@ function parseCornerDotColorOptions(colorData: colorType) {
   }
 
   qrOptions.value.cornersDotOptions = data.value;
+}
+
+function parseDotStyleOptions(styleData: DotType) {
+  if (!styleData) return;
+
+  qrOptions.value.dotsOptions.type = styleData;
+}
+function parseCornerSquareStyleOptions(styleData: CornerSquareType) {
+  if (!styleData) return;
+
+  qrOptions.value.cornersSquareOptions.type = styleData;
+}
+function parseCornerDotStyleOptions(styleData: CornerDotType) {
+  if (!styleData) return;
+
+  qrOptions.value.cornersDotOptions.type = styleData;
 }
