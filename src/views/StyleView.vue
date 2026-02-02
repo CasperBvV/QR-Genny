@@ -17,17 +17,58 @@
 
 <script setup lang="ts">
 import ArrowButton from '@/components/ArrowButton.vue';
+import type { OptionType } from '@/components/InputComponent.vue';
 import SettingsLayout from '@/components/SettingsLayout.vue';
 import StyleInputComponent from '@/components/StylePage/StyleInputComponent.vue';
+
+const dotStyleTypes: OptionType[] = [
+  {
+    label: 'Square',
+    value: 'square',
+  },
+  {
+    label: 'Dots',
+    value: 'dots',
+  },
+  {
+    label: 'Rounded',
+    value: 'rounded',
+  },
+  {
+    label: 'Classy',
+    value: 'classy',
+  },
+  {
+    label: 'Classy Rounded',
+    value: 'classy-rounded',
+  },
+  {
+    label: 'Extra Rounded',
+    value: 'extra-rounded',
+  },
+]
+
+const cornerStyleTypes: OptionType[] = [
+  ...dotStyleTypes,
+  {
+    label: 'Circle',
+    value: 'dot',
+  },
+]
 
 </script>
 
 <template>
   <SettingsLayout>
     <template #content>
-      <h2>Style Settings Coming Soon</h2>
+      <h2>Dot Style</h2>
+      <StyleInputComponent :styleTypes="dotStyleTypes" field="dotStyle" />
 
-      <StyleInputComponent />
+      <h2>Corner Style</h2>
+      <StyleInputComponent :styleTypes="cornerStyleTypes" field="cornerStyle" />
+
+      <h2>Corner Dot Style</h2>
+      <StyleInputComponent :styleTypes="cornerStyleTypes" field="cornerDotStyle" />
       <!-- Style settings components go here -->
     </template>
     <template #buttons>
