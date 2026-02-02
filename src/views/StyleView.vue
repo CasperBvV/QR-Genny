@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import ArrowButton from '@/components/ArrowButton.vue';
 import SettingsLayout from '@/components/SettingsLayout.vue';
+import StyleInputComponent from '@/components/StylePage/StyleInputComponent.vue';
 
 </script>
 
@@ -25,6 +26,8 @@ import SettingsLayout from '@/components/SettingsLayout.vue';
   <SettingsLayout>
     <template #content>
       <h2>Style Settings Coming Soon</h2>
+
+      <StyleInputComponent />
       <!-- Style settings components go here -->
     </template>
     <template #buttons>
